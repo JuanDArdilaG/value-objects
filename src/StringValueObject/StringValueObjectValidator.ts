@@ -11,20 +11,13 @@ export class StringValueObjectValidator implements IValidatable<string> {
     if (typeof value !== "string") {
       return false;
     }
-    if (this._checkLength(value)) {
-      return new InvalidStringLengthError(value, this._length);
-    }
-  }
-
-  private _checkLength(str: string): boolean {
     if (
-      str.length > this._length.maxLength ||
-      str.length < this._length.minLength
+      value.length > this._length.maxLength ||
+      value.length < this._length.minLength
     )
       throw new InvalidStringLengthError(
         `<${this.constructor.name}>`,
         this._length
       );
-    return true;
   }
 }
