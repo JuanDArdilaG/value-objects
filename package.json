@@ -4,13 +4,12 @@
   "description": "Utility library for value objects",
   "main": "index.js",
   "types": "dist/src/index.d.ts",
-  "private": false,
   "scripts": {
     "test": "npm run test:unit",
     "test:unit": "NODE_ENV=test jest --config jest-unit.json",
     "tsc": "tsc",
     "prepublish": "npm run test && rm -R dist/ && tsc",
-    "pub": "npm i && git add -A && git commit --amend --no-edit && npm publish"
+    "pub": "npm i && git add -A && git commit --amend --no-edit && npm publish --access public"
   },
   "keywords": [],
   "author": "",
