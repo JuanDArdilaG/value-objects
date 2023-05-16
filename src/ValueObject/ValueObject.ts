@@ -28,16 +28,16 @@ export abstract class ValueObject<T extends Object> implements IValueObject<T> {
     this._value = value;
   }
 
-  equal(a: IValueObject<Object>, b: IValueObject<Object>): boolean {
-    if (b === null || b === undefined) {
+  equal(other: IValueObject<Object>): boolean {
+    if (other === null || other === undefined) {
       return false;
     }
 
-    if (a.constructor.name !== b.constructor.name) {
+    if (this.constructor.name !== other.constructor.name) {
       return false;
     }
 
-    return a.value === b.value;
+    return this.value === other.value;
   }
 
   is(o: T): boolean {

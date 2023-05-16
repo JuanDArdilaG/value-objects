@@ -10,4 +10,5 @@ export interface IValueObject<T extends Object>
   set value(val: T);
   is(o: T): boolean;
   add(other: IValueObject<T>): IValueObject<T>;
+  equal(other: IValueObject<Object>): boolean;
 }
