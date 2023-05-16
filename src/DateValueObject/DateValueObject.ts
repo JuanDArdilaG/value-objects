@@ -9,6 +9,7 @@ export class DateValueObject extends ValueObject<Date> {
       {
         operable: new DateValueObjectOperator(),
         validatable: new DateValueObjectValidator(),
+        isPII: false,
       },
       new Date(value)
     );

@@ -9,6 +9,7 @@ export class BooleanValueObject<T extends any> extends ValueObject<boolean> {
       {
         operable: new BooleanValueObjectOperator<T>(),
         validatable: new BooleanValueObjectValidator(),
+        isPII: false,
       },
       value
     );

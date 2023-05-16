@@ -8,6 +8,7 @@ export abstract class EnumValueObject<T extends Object> extends ValueObject<T> {
       {
         operable: new EnumValueObjectOperator(),
         validatable: new EnumValueObjectValidator(_values),
+        isPII: false,
       },
       value
     );

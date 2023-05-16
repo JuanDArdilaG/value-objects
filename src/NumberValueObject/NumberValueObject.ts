@@ -9,6 +9,7 @@ export class NumberValueObject extends ValueObject<number> {
       {
         operable: _options?.operable ?? new NumberValueObjectOperator(),
         validatable: _options?.validatable ?? new NumberValueObjectValidator(),
+        isPII: _options?.isPII ?? false,
       },
       _value
     );

@@ -11,6 +11,7 @@ export class StringValueObject extends ValueObject<string> {
         validatable:
           options?.validatable ||
           new StringValueObjectValidator(StringLengthOptionsDefault),
+        isPII: options?.isPII || false,
       },
       _value
     );

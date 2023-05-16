@@ -15,6 +15,7 @@ export class RecordValueObject extends ValueObject<RecordValueObjectType> {
       {
         operable: new RecordValueObjectOperator(),
         validatable: new RecordValueObjectValidator(),
+        isPII: false,
       },
       _value
     );

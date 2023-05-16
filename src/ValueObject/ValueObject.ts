@@ -6,6 +6,7 @@ import { IValueObject } from "./IValueObject";
 export interface ValueObjectOptions<T extends Object> {
   operable: IOperable<T>;
   validatable: IValidatable<T>;
+  isPII: boolean;
 }
 
 export abstract class ValueObject<T extends Object> implements IValueObject<T> {
