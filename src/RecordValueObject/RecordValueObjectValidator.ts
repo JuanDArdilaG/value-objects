@@ -1,5 +1,5 @@
 import { IValidatable } from "../ValueObject/IValidatable";
-import { RecordValueObjectType } from "./RecordValueObjectTyper";
+import { RecordValueObjectType } from "./RecordValueObject";
 
 export class RecordValueObjectValidator
   implements IValidatable<RecordValueObjectType>

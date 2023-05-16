@@ -1,16 +1,15 @@
 import { InvalidArgumentError } from "./errors/InvalidArgumentError";
 import { IOperable } from "./IOperable";
-import { ITypable } from "./ITypable";
 import { IValidatable } from "./IValidatable";
 import { IValueObject } from "./IValueObject";
 
+export interface ValueObjectOptions<T extends Object> {
+  operable: IOperable<T>;
+  validatable: IValidatable<T>;
+}
+
 export abstract class ValueObject<T extends Object> implements IValueObject<T> {
-  constructor(
-    private _operable: IOperable<T>,
-    private _typable: ITypable<T>,
-    private _validatable: IValidatable<T>,
-    protected _value: T
-  ) {
+  constructor(private _options: ValueObjectOptions<T>, protected _value: T) {
     const validation = this.validate(_value);
     if (validation instanceof Error) {
       throw validation;
@@ -64,16 +63,8 @@ export abstract class ValueObject<T extends Object> implements IValueObject<T> {
     return this._value;
   }
 
-  toType(val: ValueObject<T>): T {
-    return this._typable.toType(val);
-  }
-
-  fromType(val: T): ValueObject<T> {
-    return this._typable.fromType(val);
-  }
-
   validate(val: T): Error | void {
-    const validation = this._validatable.validate(val);
+    const validation = this._options.validatable.validate(val);
     if (validation instanceof Error) {
       return validation;
     }
@@ -83,6 +74,6 @@ export abstract class ValueObject<T extends Object> implements IValueObject<T> {
   }
 
   add(other: ValueObject<T>): ValueObject<T> {
-    return this._operable.add(this, other);
+    return this._options.operable.add(this, other);
   }
 }

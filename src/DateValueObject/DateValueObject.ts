@@ -2,14 +2,14 @@ import moment from "moment-timezone";
 import { ValueObject } from "../ValueObject/ValueObject";
 import { DateValueObjectValidator } from "./DateValueObjectValidator";
 import { DateValueObjectOperator } from "./DateValueObjectOperator";
-import { DateValueObjectTyper } from "./DateValueObjectTyper";
 
 export class DateValueObject extends ValueObject<Date> {
   constructor(value: Date | string | number) {
     super(
-      new DateValueObjectOperator(),
-      new DateValueObjectTyper(),
-      new DateValueObjectValidator(),
+      {
+        operable: new DateValueObjectOperator(),
+        validatable: new DateValueObjectValidator(),
+      },
       new Date(value)
     );
   }

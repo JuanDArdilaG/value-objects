@@ -1,20 +1,17 @@
-import { IValidatable } from "../ValueObject/IValidatable";
-import { ValueObject } from "../ValueObject/ValueObject";
+import { ValueObject, ValueObjectOptions } from "../ValueObject/ValueObject";
 import { StringValueObjectOperator } from "./StringValueObjectOperator";
-import { StringValueObjectTyper } from "./StringValueObjectTyper";
+
 import { StringValueObjectValidator } from "./StringValueObjectValidator";
 
 export class StringValueObject extends ValueObject<string> {
-  constructor(
-    _value: string,
-    _operator?: StringValueObjectOperator,
-    _typer?: StringValueObjectTyper,
-    _validator?: IValidatable<string>
-  ) {
+  constructor(_value: string, options?: Partial<ValueObjectOptions<string>>) {
     super(
-      _operator || new StringValueObjectOperator(),
-      _typer || new StringValueObjectTyper(),
-      _validator || new StringValueObjectValidator(StringLengthOptionsDefault),
+      {
+        operable: options?.operable || new StringValueObjectOperator(),
+        validatable:
+          options?.validatable ||
+          new StringValueObjectValidator(StringLengthOptionsDefault),
+      },
       _value
     );
   }

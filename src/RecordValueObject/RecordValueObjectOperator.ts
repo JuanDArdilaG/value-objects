@@ -1,6 +1,5 @@
 import { IOperable } from "../ValueObject/IOperable";
-import { RecordValueObject } from "./RecordValueObject";
-import { RecordValueObjectType } from "./RecordValueObjectTyper";
+import { RecordValueObject, RecordValueObjectType } from "./RecordValueObject";
 
 export class RecordValueObjectOperator
   implements IOperable<RecordValueObjectType>

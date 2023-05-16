@@ -5,11 +5,11 @@ export type JWTAccessTokenOptions = {
 };
 
 export class JWTAccessToken extends StringValueObject {
-  private _options: JWTAccessTokenOptions = {};
+  private _jwtOptions: JWTAccessTokenOptions = {};
   constructor(data: string, protected _signed: boolean, expiresIn?: number) {
     super(data);
     if (expiresIn) {
-      this._options = { expiresIn: expiresIn };
+      this._jwtOptions = { expiresIn: expiresIn };
     }
   }
 
@@ -18,6 +18,6 @@ export class JWTAccessToken extends StringValueObject {
   }
 
   get options(): JWTAccessTokenOptions {
-    return this._options;
+    return this._jwtOptions;
   }
 }

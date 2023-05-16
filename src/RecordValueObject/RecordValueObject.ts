@@ -1,19 +1,21 @@
 import { ValueObject } from "../ValueObject/ValueObject";
 import { RecordValueObjectValidator } from "./RecordValueObjectValidator";
-import {
-  RecordValueObjectType,
-  RecordAcceptedKeys,
-  RecordAcceptedValues,
-  RecordValueObjectTyper,
-} from "./RecordValueObjectTyper";
 import { RecordValueObjectOperator } from "./RecordValueObjectOperator";
 
+export type RecordAcceptedKeys = string | number;
+export type RecordAcceptedValues = string | number;
+
+export type RecordValueObjectType = Record<
+  RecordAcceptedKeys,
+  RecordAcceptedValues
+>;
 export class RecordValueObject extends ValueObject<RecordValueObjectType> {
   constructor(_value: RecordValueObjectType) {
     super(
-      new RecordValueObjectOperator(),
-      new RecordValueObjectTyper(),
-      new RecordValueObjectValidator(),
+      {
+        operable: new RecordValueObjectOperator(),
+        validatable: new RecordValueObjectValidator(),
+      },
       _value
     );
   }

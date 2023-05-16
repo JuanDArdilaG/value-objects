@@ -1,16 +1,15 @@
 import { BooleanValueObject } from "../BooleanValueObject/BooleanValueObject";
-import { IValidatable } from "../ValueObject/IValidatable";
-import { ValueObject } from "../ValueObject/ValueObject";
+import { ValueObject, ValueObjectOptions } from "../ValueObject/ValueObject";
 import { NumberValueObjectOperator } from "./NumberValueObjectOperator";
-import { NumberValueObjectTyper } from "./NumberValueObjectTyper";
 import { NumberValueObjectValidator } from "./NumberValueObjectValidator";
 
 export class NumberValueObject extends ValueObject<number> {
-  constructor(_value: number, _validator?: IValidatable<number>) {
+  constructor(_value: number, _options?: Partial<ValueObjectOptions<number>>) {
     super(
-      new NumberValueObjectOperator(),
-      new NumberValueObjectTyper(),
-      _validator || new NumberValueObjectValidator(),
+      {
+        operable: _options?.operable ?? new NumberValueObjectOperator(),
+        validatable: _options?.validatable ?? new NumberValueObjectValidator(),
+      },
       _value
     );
   }

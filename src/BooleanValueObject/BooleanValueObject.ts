@@ -1,15 +1,15 @@
 import { ValueObject } from "../ValueObject/ValueObject";
 import { BooleanValueObjectOperator } from "./BooleanValueObjectOperator";
-import { BooleanValueObjectTyper } from "./BooleanValueObjectTyper";
 import { BooleanValueObjectValidator } from "./BooleanValueObjectValidator";
 
 export class BooleanValueObject<T extends any> extends ValueObject<boolean> {
   private _eval: T = Object.create(null);
   constructor(value: boolean) {
     super(
-      new BooleanValueObjectOperator(),
-      new BooleanValueObjectTyper(),
-      new BooleanValueObjectValidator(),
+      {
+        operable: new BooleanValueObjectOperator<T>(),
+        validatable: new BooleanValueObjectValidator(),
+      },
       value
     );
   }
