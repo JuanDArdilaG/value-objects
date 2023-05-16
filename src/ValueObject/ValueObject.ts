@@ -70,7 +70,7 @@ export abstract class ValueObject<T extends Object> implements IValueObject<T> {
     }
   }
 
-  add(a: IValueObject<T>, b: IValueObject<T>): IValueObject<T> {
-    return this._operable.add(a, b);
+  add(other: IValueObject<T>): IValueObject<T> {
+    return this._operable.add(this, other);
   }
 }
