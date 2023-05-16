@@ -1,9 +1,9 @@
 {
   "name": "@juandardilag/value-objects",
-  "version": "1.0.5",
+  "version": "1.0.7",
   "description": "Utility library for value objects",
-  "main": "index.js",
-  "types": "dist/src/index.d.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "test": "npm run test:unit",
     "test:unit": "NODE_ENV=test jest --config jest-unit.json",
