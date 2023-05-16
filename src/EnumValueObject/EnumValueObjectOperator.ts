@@ -1,4 +1,4 @@
-import { ValueObject } from "src/ValueObject";
+import { ValueObject } from "../ValueObject";
 import { IOperable } from "../ValueObject/IOperable";
 
 export class EnumValueObjectOperator<T extends Object> implements IOperable<T> {
