@@ -52,11 +52,11 @@ export abstract class ValueObject<T extends Object> implements IValueObject<T> {
     return this._value;
   }
 
-  toType(val: IValueObject<T>): T {
+  toType(val: ValueObject<T>): T {
     return this._typable.toType(val);
   }
 
-  fromType(val: T): IValueObject<T> {
+  fromType(val: T): ValueObject<T> {
     return this._typable.fromType(val);
   }
 
@@ -70,7 +70,7 @@ export abstract class ValueObject<T extends Object> implements IValueObject<T> {
     }
   }
 
-  add(other: IValueObject<T>): IValueObject<T> {
+  add(other: ValueObject<T>): ValueObject<T> {
     return this._operable.add(this, other);
   }
 }

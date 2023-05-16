@@ -1,8 +1,8 @@
 import { IOperable } from "../ValueObject/IOperable";
-import { IValueObject } from "../ValueObject/IValueObject";
+import { UUIDValueObject } from "./UUIDValueObject";
 
 export class UUIDValueObjectOperator implements IOperable<string> {
-  add(_: IValueObject<string>, __: IValueObject<string>): IValueObject<string> {
+  add(_: UUIDValueObject, __: UUIDValueObject): UUIDValueObject {
     throw new Error("method not implemented.");
   }
 }

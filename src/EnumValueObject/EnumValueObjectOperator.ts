@@ -1,8 +1,8 @@
+import { ValueObject } from "src/ValueObject";
 import { IOperable } from "../ValueObject/IOperable";
-import { IValueObject } from "../ValueObject/IValueObject";
 
 export class EnumValueObjectOperator<T extends Object> implements IOperable<T> {
-  add(_: IValueObject<T>, __: IValueObject<T>): IValueObject<T> {
+  add(_: ValueObject<T>, __: ValueObject<T>): ValueObject<T> {
     throw new Error("method not implemented.");
   }
 }

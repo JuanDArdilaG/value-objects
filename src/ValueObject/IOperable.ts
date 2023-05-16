@@ -1,5 +1,5 @@
-import { IValueObject } from "./IValueObject";
+import { ValueObject } from "./ValueObject";
 
 export interface IOperable<T extends Object> {
-  add(a: IValueObject<T>, b: IValueObject<T>): IValueObject<T>;
+  add(a: ValueObject<T>, b: ValueObject<T>): ValueObject<T>;
 }

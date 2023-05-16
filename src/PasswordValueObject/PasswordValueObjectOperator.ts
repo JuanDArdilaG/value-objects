@@ -1,8 +1,8 @@
 import { IOperable } from "../ValueObject/IOperable";
-import { IValueObject } from "../ValueObject/IValueObject";
+import { PasswordValueObject } from "./PasswordValueObject";
 
 export class PasswordValueObjectOperator implements IOperable<string> {
-  add(_: IValueObject<string>, __: IValueObject<string>): IValueObject<string> {
-    throw new Error("method not implemented.");
+  add(_: PasswordValueObject, __: PasswordValueObject): PasswordValueObject {
+    throw new Error("Method not implemented.");
   }
 }

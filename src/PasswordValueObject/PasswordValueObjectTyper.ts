@@ -1,13 +1,12 @@
 import { ITypable } from "../ValueObject/ITypable";
-import { IValueObject } from "../ValueObject/IValueObject";
 import { PasswordValueObject } from "./PasswordValueObject";
 
 export class PasswordValueObjectTyper implements ITypable<string> {
-  toType(val: IValueObject<string>): string {
+  toType(val: PasswordValueObject): string {
     return val.value;
   }
 
-  fromType(val: string): IValueObject<string> {
+  fromType(val: string): PasswordValueObject {
     return new PasswordValueObject(val, true);
   }
 }

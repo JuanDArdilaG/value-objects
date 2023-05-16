@@ -1,12 +1,12 @@
 import { ITypable } from "../ValueObject/ITypable";
-import { IValueObject } from "../ValueObject/IValueObject";
+import { EnumValueObject } from "./EnumValueObject";
 
 export class EnumValueObjectTyper<T extends Object> implements ITypable<T> {
-  toType(val: IValueObject<T>): T {
+  toType(val: EnumValueObject<T>): T {
     return val.value;
   }
 
-  fromType(_: T): IValueObject<T> {
+  fromType(_: T): EnumValueObject<T> {
     throw new Error("method not implemented.");
   }
 }

@@ -1,13 +1,12 @@
 import { ITypable } from "../ValueObject/ITypable";
-import { IValueObject } from "../ValueObject/IValueObject";
 import { NumberValueObject } from "./NumberValueObject";
 
 export class NumberValueObjectTyper implements ITypable<number> {
-  toType(val: IValueObject<number>): number {
+  toType(val: NumberValueObject): number {
     return val.value;
   }
 
-  fromType(val: number): IValueObject<number> {
+  fromType(val: number): NumberValueObject {
     return new NumberValueObject(val);
   }
 }

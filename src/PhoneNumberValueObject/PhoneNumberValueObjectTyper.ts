@@ -1,13 +1,12 @@
 import { ITypable } from "../ValueObject/ITypable";
-import { IValueObject } from "../ValueObject/IValueObject";
 import { PhoneNumberValueObject } from "./PhoneNumberValueObject";
 
 export class PhoneNumberValueObjectTyper implements ITypable<string> {
-  toType(val: IValueObject<string>): string {
+  toType(val: PhoneNumberValueObject): string {
     return val.value;
   }
 
-  fromType(val: string): IValueObject<string> {
+  fromType(val: string): PhoneNumberValueObject {
     return new PhoneNumberValueObject(val);
   }
 }

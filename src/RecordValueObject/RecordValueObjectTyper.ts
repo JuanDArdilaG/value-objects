@@ -1,5 +1,4 @@
 import { ITypable } from "../ValueObject/ITypable";
-import { IValueObject } from "../ValueObject/IValueObject";
 import { RecordValueObject } from "./RecordValueObject";
 
 export type RecordAcceptedKeys = string | number;
@@ -11,11 +10,11 @@ export type RecordValueObjectType = Record<
 >;
 
 export class RecordValueObjectTyper implements ITypable<RecordValueObjectType> {
-  toType(val: IValueObject<RecordValueObjectType>): RecordValueObjectType {
+  toType(val: RecordValueObject): RecordValueObjectType {
     return val.value;
   }
 
-  fromType(val: RecordValueObjectType): IValueObject<RecordValueObjectType> {
+  fromType(val: RecordValueObjectType): RecordValueObject {
     return new RecordValueObject(val);
   }
 }

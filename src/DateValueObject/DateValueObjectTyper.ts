@@ -1,13 +1,12 @@
 import { ITypable } from "../ValueObject/ITypable";
-import { IValueObject } from "../ValueObject/IValueObject";
 import { DateValueObject } from "./DateValueObject";
 
 export class DateValueObjectTyper implements ITypable<Date> {
-  toType(val: IValueObject<Date>): Date {
+  toType(val: DateValueObject): Date {
     return val.value;
   }
 
-  fromType(val: Date): IValueObject<Date> {
+  fromType(val: Date): DateValueObject {
     return new DateValueObject(val);
   }
 }
