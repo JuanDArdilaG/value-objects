@@ -40,6 +40,18 @@ export abstract class ValueObject<T extends Object> implements IValueObject<T> {
     return this.value === other.value;
   }
 
+  isBiggerThan(other: ValueObject<T>): boolean {
+    if (other === null || other === undefined) {
+      return false;
+    }
+
+    if (typeof this.value !== typeof other.value) {
+      return false;
+    }
+
+    return this.value > other.value;
+  }
+
   is(o: T): boolean {
     return this._value === o;
   }

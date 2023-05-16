@@ -31,10 +31,6 @@ export class NumberValueObject extends ValueObject<number> {
     return new BooleanValueObject(this._value !== other._value);
   }
 
-  isBiggerThan(other: NumberValueObject): BooleanValueObject<number> {
-    return new BooleanValueObject(this._value > other._value);
-  }
-
   isLessThan(other: NumberValueObject): BooleanValueObject<number> {
     return new BooleanValueObject(this._value < other._value);
   }

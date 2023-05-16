@@ -12,4 +12,5 @@ export interface IValueObject<T extends Object>
   is(o: T): boolean;
   add(other: ValueObject<T>): ValueObject<T>;
   equal(other: IValueObject<Object>): boolean;
+  isBiggerThan(other: ValueObject<T>): boolean;
 }
