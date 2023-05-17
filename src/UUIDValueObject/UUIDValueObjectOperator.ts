@@ -1,4 +1,4 @@
-import { StringValueObjectOperator } from "src/StringValueObject";
+import { StringValueObjectOperator } from "../StringValueObject";
 import { UUIDValueObject } from "./UUIDValueObject";
 
 export class UUIDValueObjectOperator extends StringValueObjectOperator {

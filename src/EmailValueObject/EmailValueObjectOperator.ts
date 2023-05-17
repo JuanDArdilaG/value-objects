@@ -1,4 +1,4 @@
-import { StringValueObjectOperator } from "src/StringValueObject";
+import { StringValueObjectOperator } from "../StringValueObject";
 import { EmailValueObject } from "./EmailValueObject";
 
 export class EmailValueObjectOperator extends StringValueObjectOperator {
