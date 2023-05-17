@@ -3,10 +3,15 @@ import { IOperable } from "./IOperable";
 import { IValidatable } from "./IValidatable";
 import { IValueObject } from "./IValueObject";
 
+export interface PIIOptions {
+  key: string;
+  iv: string;
+}
+
 export interface ValueObjectOptions<T extends Object> {
   operable: IOperable<T>;
   validatable: IValidatable<T>;
-  isPII: boolean;
+  pii?: PIIOptions;
 }
 
 export abstract class ValueObject<T extends Object> implements IValueObject<T> {
@@ -79,14 +84,14 @@ export abstract class ValueObject<T extends Object> implements IValueObject<T> {
   }
 
   async encrypt(val: T): Promise<string> {
-    if (!this._options.isPII) {
+    if (!this._options.pii) {
       throw new Error("Cannot encrypt non-PII");
     }
     return this._options.operable.encrypt(val);
   }
 
   async decrypt(val: string): Promise<T> {
-    if (!this._options.isPII) {
+    if (!this._options.pii) {
       throw new Error("Cannot decrypt non-PII");
     }
     return this._options.operable.decrypt(val);

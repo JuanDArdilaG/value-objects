@@ -7,11 +7,16 @@ export class StringValueObject extends ValueObject<string> {
   constructor(_value: string, options?: Partial<ValueObjectOptions<string>>) {
     super(
       {
-        operable: options?.operable || new StringValueObjectOperator(),
+        operable:
+          options?.operable ||
+          new StringValueObjectOperator(
+            options?.pii?.key || "",
+            options?.pii?.iv || ""
+          ),
         validatable:
           options?.validatable ||
           new StringValueObjectValidator(StringLengthOptionsDefault),
-        isPII: options?.isPII || false,
+        pii: options?.pii,
       },
       _value
     );

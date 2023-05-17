@@ -8,7 +8,6 @@ export class ArrayValueObject<T extends Object> extends ValueObject<T[]> {
       {
         validatable: new ArrayValueObjectValidator<T>(),
         operable: new ArrayValueObjectOperator<T>(),
-        isPII: false,
       },
       value
     );

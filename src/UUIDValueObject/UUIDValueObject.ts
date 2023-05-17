@@ -6,7 +6,7 @@ import { UUIDValueObjectOperator } from "./UUIDValueObjectOperator";
 export class UUIDValueObject extends IdentifierValueObject {
   constructor(_value: string) {
     super(_value, {
-      operable: new UUIDValueObjectOperator(),
+      operable: new UUIDValueObjectOperator("", ""),
       validatable: new UUIDValueObjectValidator(),
     });
   }

@@ -10,4 +10,12 @@ export class BooleanValueObjectOperator<T extends any>
   ): BooleanValueObject<T> {
     return new BooleanValueObject<T>(a.value && b.value);
   }
+
+  encrypt(_: boolean): Promise<string> {
+    throw new Error("Method not implemented.");
+  }
+
+  decrypt(_: string): Promise<boolean> {
+    throw new Error("Method not implemented.");
+  }
 }

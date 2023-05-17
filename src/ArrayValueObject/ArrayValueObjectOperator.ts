@@ -7,4 +7,12 @@ export class ArrayValueObjectOperator<T extends Object>
   add(a: ArrayValueObject<T>, b: ArrayValueObject<T>): ArrayValueObject<T> {
     return new ArrayValueObject(a.value.concat(b.value));
   }
+
+  encrypt(_: T[]): Promise<string> {
+    throw new Error("Method not implemented.");
+  }
+
+  decrypt(_: string): Promise<T[]> {
+    throw new Error("Method not implemented.");
+  }
 }

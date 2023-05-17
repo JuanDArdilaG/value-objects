@@ -1,3 +1,6 @@
-export { EmailValueObject } from "./EmailValueObject";
-export { EmailValueObjectOperator } from "./EmailValueObjectOperator";
-export { EmailValueObjectValidator } from "./EmailValueObjectValidator";
+// created from 'create-ts-index'
+
+export * from './errors';
+export * from './EmailValueObject';
+export * from './EmailValueObjectOperator';
+export * from './EmailValueObjectValidator';

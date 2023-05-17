@@ -1,3 +1,5 @@
-export { BooleanValueObject } from "./BooleanValueObject";
-export { BooleanValueObjectOperator } from "./BooleanValueObjectOperator";
-export { BooleanValueObjectValidator } from "./BooleanValueObjectValidator";
+// created from 'create-ts-index'
+
+export * from './BooleanValueObject';
+export * from './BooleanValueObjectOperator';
+export * from './BooleanValueObjectValidator';

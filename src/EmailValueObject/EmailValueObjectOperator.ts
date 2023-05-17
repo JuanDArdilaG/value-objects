@@ -1,8 +1,16 @@
-import { IOperable } from "../ValueObject/IOperable";
+import { StringValueObjectOperator } from "src/StringValueObject";
 import { EmailValueObject } from "./EmailValueObject";
 
-export class EmailValueObjectOperator implements IOperable<string> {
+export class EmailValueObjectOperator extends StringValueObjectOperator {
   add(_: EmailValueObject, __: EmailValueObject): EmailValueObject {
     throw new Error("Method not implemented.");
+  }
+
+  encrypt(val: string): Promise<string> {
+    return super.encrypt(val);
+  }
+
+  decrypt(val: string): Promise<string> {
+    return super.decrypt(val);
   }
 }

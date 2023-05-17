@@ -1,8 +1,16 @@
-import { IOperable } from "../ValueObject/IOperable";
+import { StringValueObjectOperator } from "src/StringValueObject";
 import { UUIDValueObject } from "./UUIDValueObject";
 
-export class UUIDValueObjectOperator implements IOperable<string> {
+export class UUIDValueObjectOperator extends StringValueObjectOperator {
   add(_: UUIDValueObject, __: UUIDValueObject): UUIDValueObject {
     throw new Error("method not implemented.");
+  }
+
+  encrypt(val: string): Promise<string> {
+    return super.encrypt(val);
+  }
+
+  decrypt(val: string): Promise<string> {
+    return super.decrypt(val);
   }
 }

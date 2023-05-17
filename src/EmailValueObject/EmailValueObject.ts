@@ -5,7 +5,7 @@ import { EmailValueObjectValidator } from "./EmailValueObjectValidator";
 export class EmailValueObject extends StringValueObject {
   constructor(email: string) {
     super(email, {
-      operable: new EmailValueObjectOperator(),
+      operable: new EmailValueObjectOperator("", ""),
       validatable: new EmailValueObjectValidator(),
     });
   }
