@@ -1,5 +1,6 @@
-export * from "./StringValueObject";
-export * from "./StringValueObjectOperator";
-export * from "./StringValueObjectValidator";
+// created from 'create-ts-index'
 
-export * from "./errors/InvalidStringLengthError";
+export * from './errors';
+export * from './StringValueObject';
+export * from './StringValueObjectOperator';
+export * from './StringValueObjectValidator';

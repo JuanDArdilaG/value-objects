@@ -77,4 +77,18 @@ export abstract class ValueObject<T extends Object> implements IValueObject<T> {
   add(other: ValueObject<T>): ValueObject<T> {
     return this._options.operable.add(this, other);
   }
+
+  async encrypt(val: T): Promise<string> {
+    if (!this._options.isPII) {
+      throw new Error("Cannot encrypt non-PII");
+    }
+    return this._options.operable.encrypt(val);
+  }
+
+  async decrypt(val: string): Promise<T> {
+    if (!this._options.isPII) {
+      throw new Error("Cannot decrypt non-PII");
+    }
+    return this._options.operable.decrypt(val);
+  }
 }

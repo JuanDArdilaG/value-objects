@@ -1,3 +1,5 @@
-export { RecordValueObject } from "./RecordValueObject";
-export { RecordValueObjectOperator } from "./RecordValueObjectOperator";
-export { RecordValueObjectValidator } from "./RecordValueObjectValidator";
+// created from 'create-ts-index'
+
+export * from './RecordValueObject';
+export * from './RecordValueObjectOperator';
+export * from './RecordValueObjectValidator';

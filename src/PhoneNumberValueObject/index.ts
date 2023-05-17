@@ -1,2 +1,4 @@
-export { PhoneNumberValueObject } from "./PhoneNumberValueObject";
-export { PhoneNumberValueObjectValidator } from "./PhoneNumberValueObjectValidator";
+// created from 'create-ts-index'
+
+export * from './PhoneNumberValueObject';
+export * from './PhoneNumberValueObjectValidator';

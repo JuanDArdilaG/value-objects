@@ -1,3 +1,5 @@
-export { ArrayValueObject } from "./ArrayValueObject";
-export { ArrayValueObjectOperator } from "./ArrayValueObjectOperator";
-export { ArrayValueObjectValidator } from "./ArrayValueObjectValidator";
+// created from 'create-ts-index'
+
+export * from './ArrayValueObject';
+export * from './ArrayValueObjectOperator';
+export * from './ArrayValueObjectValidator';

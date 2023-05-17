@@ -1,5 +1,6 @@
-export * from "./PasswordValueObject";
-export * from "./PasswordValueObjectOperator";
-export * from "./PasswordValueObjectValidator";
+// created from 'create-ts-index'
 
-export * from "./errors/InvalidPasswordException";
+export * from './errors';
+export * from './PasswordValueObject';
+export * from './PasswordValueObjectOperator';
+export * from './PasswordValueObjectValidator';

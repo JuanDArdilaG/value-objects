@@ -1,1 +1,3 @@
-export { IterableValueObject } from "./IterableValueObject";
+// created from 'create-ts-index'
+
+export * from './IterableValueObject';

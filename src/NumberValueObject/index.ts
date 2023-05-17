@@ -1,3 +1,5 @@
-export { NumberValueObject } from "./NumberValueObject";
-export { NumberValueObjectOperator } from "./NumberValueObjectOperator";
-export { NumberValueObjectValidator } from "./NumberValueObjectValidator";
+// created from 'create-ts-index'
+
+export * from './NumberValueObject';
+export * from './NumberValueObjectOperator';
+export * from './NumberValueObjectValidator';
