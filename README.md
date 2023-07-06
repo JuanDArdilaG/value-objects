@@ -26,18 +26,18 @@ type Operator {
 }
 ```
 
-Package provides the follow value object specifications (with its corresponding )
+Package provides the follow value object specifications
 
-- BooleanValueObject<T extends any> extends ValueObject<boolean>
-- NumberValueObject extends ValueObject<number>
-- StringValueObject extends ValueObject<string>
-  - EmailValueObject extends StringValueObject
-  - JWTAccessToken extends StringValueObject
-  - PasswordValueObject extends StringValueObject
-  - PhoneNumberValueObject extends StringValueObject
-  - IdentifierValueObject extends StringValueObject
-  - UUIDValueObject extends IdentifierValueObject
-- DateValueObject extends ValueObject<Date>
-- ArrayValueObject<T extends Object> extends ValueObject<T[]>
-- EnumValueObject<T extends Object> extends ValueObject<T>
-- RecordValueObject extends ValueObject<RecordValueObjectType>
+- `BooleanValueObject<T extends any> extends ValueObject<boolean>`
+- `NumberValueObject extends ValueObject<number>`
+- `StringValueObject extends ValueObject<string>`
+  - `EmailValueObject extends StringValueObject`
+  - `JWTAccessToken extends StringValueObject`
+  - `PasswordValueObject extends StringValueObject`
+  - `PhoneNumberValueObject extends StringValueObject`
+  - `IdentifierValueObject extends StringValueObject`
+  - `UUIDValueObject extends IdentifierValueObject`
+- `DateValueObject extends ValueObject<Date>`
+- `ArrayValueObject<T extends Object> extends ValueObject<T[]>`
+- `EnumValueObject<T extends Object> extends ValueObject<T>`
+- `RecordValueObject extends ValueObject<RecordValueObjectType>`
