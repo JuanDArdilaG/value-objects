@@ -60,8 +60,4 @@ export class NumberValueObject extends ValueObject<number> {
   times(value: NumberValueObject): NumberValueObject {
     return new NumberValueObject(this._value * value._value);
   }
-
-  static from(value: NumberValueObject): NumberValueObject {
-    return new NumberValueObject(value._value);
-  }
 }
