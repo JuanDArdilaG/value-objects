@@ -1,7 +1,8 @@
+import { ValueObject } from "src/ValueObject";
 import { IOperable } from "../ValueObject/IOperable";
 import { ArrayValueObject } from "./ArrayValueObject";
 
-export class ArrayValueObjectOperator<T extends Object>
+export class ArrayValueObjectOperator<T extends ValueObject<Object>>
   implements IOperable<T[]>
 {
   add(a: ArrayValueObject<T>, b: ArrayValueObject<T>): ArrayValueObject<T> {

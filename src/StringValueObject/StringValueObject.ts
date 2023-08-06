@@ -1,6 +1,5 @@
-import { ValueObject, ValueObjectOptions } from "../ValueObject/ValueObject";
+import { ValueObject, ValueObjectOptions } from "../ValueObject";
 import { StringValueObjectOperator } from "./StringValueObjectOperator";
-
 import { StringValueObjectValidator } from "./StringValueObjectValidator";
 
 export class StringValueObject extends ValueObject<string> {

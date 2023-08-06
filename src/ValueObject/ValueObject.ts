@@ -1,3 +1,4 @@
+import { StringValueObject } from "src/StringValueObject";
 import { InvalidArgumentError } from "./errors/InvalidArgumentError";
 import { IOperable } from "./IOperable";
 import { IValidatable } from "./IValidatable";
@@ -61,12 +62,8 @@ export abstract class ValueObject<T extends Object> implements IValueObject<T> {
     return this._value === o;
   }
 
-  toString() {
-    if (this._value) {
-      return this._value.toString();
-    }
-
-    return this._value;
+  toString(): StringValueObject {
+    return new StringValueObject(this._value.toString());
   }
 
   validate(val: T): Error | void {

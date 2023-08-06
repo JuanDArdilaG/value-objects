@@ -1,3 +1,4 @@
+import { StringValueObject } from "src/StringValueObject";
 import { ValueObject } from "../ValueObject/ValueObject";
 import { BooleanValueObjectOperator } from "./BooleanValueObjectOperator";
 import { BooleanValueObjectValidator } from "./BooleanValueObjectValidator";
@@ -40,8 +41,10 @@ export class BooleanValueObject<T extends any> extends ValueObject<boolean> {
     return new BooleanValueObject(!this.value);
   }
 
-  toString(): string {
-    return this.value ? "true" : "false";
+  toString(): StringValueObject {
+    return this.value
+      ? new StringValueObject("true")
+      : new StringValueObject("false");
   }
 
   then(fn: () => T): BooleanValueObject<T> {
