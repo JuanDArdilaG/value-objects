@@ -15,12 +15,6 @@ export class BooleanValueObject<T extends any> extends ValueObject<boolean> {
     );
   }
 
-  static from<T extends any>(
-    other: BooleanValueObject<any>
-  ): BooleanValueObject<T> {
-    return new BooleanValueObject<T>(other.value);
-  }
-
   static true<T extends any>(): BooleanValueObject<T> {
     return new BooleanValueObject<T>(true);
   }

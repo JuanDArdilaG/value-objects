@@ -15,12 +15,16 @@ export interface ValueObjectOptions<T extends Object> {
   pii?: PIIOptions;
 }
 
-export abstract class ValueObject<T extends Object> implements IValueObject<T> {
+export class ValueObject<T extends Object> implements IValueObject<T> {
   constructor(private _options: ValueObjectOptions<T>, protected _value: T) {
     const validation = this.validate(_value);
     if (validation instanceof Error) {
       throw validation;
     }
+  }
+
+  static from<T extends Object>(other: ValueObject<T>): ValueObject<T> {
+    return new ValueObject<T>(other._options, other.value);
   }
 
   get value(): T {
