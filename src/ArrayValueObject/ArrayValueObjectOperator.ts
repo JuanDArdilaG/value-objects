@@ -1,4 +1,4 @@
-import { ValueObject } from "src/ValueObject";
+import { ValueObject } from "../ValueObject";
 import { IOperable } from "../ValueObject/IOperable";
 import { ArrayValueObject } from "./ArrayValueObject";
 

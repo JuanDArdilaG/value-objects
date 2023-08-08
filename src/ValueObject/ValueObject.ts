@@ -1,4 +1,4 @@
-import { StringValueObject } from "src/StringValueObject";
+import { StringValueObject } from "../StringValueObject";
 import { InvalidArgumentError } from "./errors/InvalidArgumentError";
 import { IOperable } from "./IOperable";
 import { IValidatable } from "./IValidatable";

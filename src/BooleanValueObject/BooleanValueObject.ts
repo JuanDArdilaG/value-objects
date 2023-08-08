@@ -1,4 +1,4 @@
-import { StringValueObject } from "src/StringValueObject";
+import { StringValueObject } from "../StringValueObject";
 import { ValueObject } from "../ValueObject/ValueObject";
 import { BooleanValueObjectOperator } from "./BooleanValueObjectOperator";
 import { BooleanValueObjectValidator } from "./BooleanValueObjectValidator";

@@ -1,6 +1,6 @@
 {
   "name": "@juandardilag/value-objects",
-  "version": "1.2.5",
+  "version": "1.2.5-1",
   "description": "Utility library for value objects",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
