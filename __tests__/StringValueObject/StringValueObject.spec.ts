@@ -12,6 +12,6 @@ describe("StringValueObject", () => {
 
     const stringVO2 = StringValueObject.from(stringVO);
 
-    expect(stringVO2.value).toBe(stringVO.value);
+    expect(stringVO2.value).toBe("test");
   });
 });
