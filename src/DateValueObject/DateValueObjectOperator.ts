@@ -1,9 +1,36 @@
 import { IOperable } from "../ValueObject/IOperable";
-import { DateValueObject } from "./DateValueObject";
 
 export class DateValueObjectOperator implements IOperable<Date> {
-  add(a: DateValueObject, b: DateValueObject): DateValueObject {
-    return new DateValueObject(a.value.getTime() + b.value.getTime());
+  add(a: Date, b: Date): Date {
+    return new Date(a.getTime() + b.getTime());
+  }
+
+  substract(a: Date, b: Date): Date {
+    return new Date(a.getTime() - b.getTime());
+  }
+
+  times(_times: number, _x: Date): Date {
+    throw new Error("Method not implemented.");
+  }
+
+  equalTo(a: Date, b: Date): boolean {
+    return a.valueOf() === b.valueOf();
+  }
+
+  differsFrom(a: Date, b: Date): boolean {
+    return a.valueOf() !== b.valueOf();
+  }
+
+  isBiggerOrEqualThan(a: Date, b: Date): boolean {
+    return a.valueOf() >= b.valueOf();
+  }
+
+  isBiggerThan(a: Date, b: Date): boolean {
+    return a.valueOf() > b.valueOf();
+  }
+
+  isLessThan(a: Date, b: Date): boolean {
+    return a.valueOf() < b.valueOf();
   }
 
   encrypt(_: Date): Promise<string> {

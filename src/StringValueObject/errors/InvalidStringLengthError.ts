@@ -1,4 +1,4 @@
-import { StringLengthOptions } from "../StringValueObject";
+import { StringLengthOptions } from "../StringValueOptions";
 
 export class InvalidStringLengthError extends Error {
   constructor(str: string, options: StringLengthOptions) {

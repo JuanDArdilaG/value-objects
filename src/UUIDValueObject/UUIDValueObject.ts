@@ -11,10 +11,6 @@ export class UUIDValueObject extends IdentifierValueObject {
     });
   }
 
-  get value(): string {
-    return this._value;
-  }
-
   static random(): UUIDValueObject {
     return new UUIDValueObject(v4());
   }

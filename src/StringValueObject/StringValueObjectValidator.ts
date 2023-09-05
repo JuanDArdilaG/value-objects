@@ -1,6 +1,6 @@
 import { IValidatable } from "../ValueObject/IValidatable";
+import { StringLengthOptions } from "./StringValueOptions";
 import { InvalidStringLengthError } from "./errors/InvalidStringLengthError";
-import { StringLengthOptions } from "./StringValueObject";
 
 export class StringValueObjectValidator implements IValidatable<string> {
   constructor(

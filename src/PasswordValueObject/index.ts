@@ -2,5 +2,4 @@
 
 export * from './errors';
 export * from './PasswordValueObject';
-export * from './PasswordValueObjectOperator';
 export * from './PasswordValueObjectValidator';

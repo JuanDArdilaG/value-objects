@@ -1,4 +1,3 @@
-import { StringValueObject } from "../StringValueObject";
 import { ValueObject } from "../ValueObject/ValueObject";
 import { BooleanValueObjectOperator } from "./BooleanValueObjectOperator";
 import { BooleanValueObjectValidator } from "./BooleanValueObjectValidator";
@@ -8,7 +7,7 @@ export class BooleanValueObject<T extends any> extends ValueObject<boolean> {
   constructor(value: boolean) {
     super(
       {
-        operable: new BooleanValueObjectOperator<T>(),
+        operable: new BooleanValueObjectOperator(),
         validatable: new BooleanValueObjectValidator(),
       },
       value
@@ -24,25 +23,23 @@ export class BooleanValueObject<T extends any> extends ValueObject<boolean> {
   }
 
   or(other: BooleanValueObject<T>): BooleanValueObject<T> {
-    return new BooleanValueObject(this.value || other.value);
+    return new BooleanValueObject(this.valueOf() || other.valueOf());
   }
 
   and(other: BooleanValueObject<T>): BooleanValueObject<T> {
-    return new BooleanValueObject(this.value && other.value);
+    return new BooleanValueObject(this.valueOf() && other.valueOf());
   }
 
   not(): BooleanValueObject<T> {
-    return new BooleanValueObject(!this.value);
+    return new BooleanValueObject(!this.valueOf());
   }
 
-  toString(): StringValueObject {
-    return this.value
-      ? new StringValueObject("true")
-      : new StringValueObject("false");
+  toString(): string {
+    return this.valueOf() ? "true" : "false";
   }
 
   then(fn: () => T): BooleanValueObject<T> {
-    if (!this.value) {
+    if (!this.valueOf()) {
       return this;
     }
     this._eval = fn();
@@ -50,7 +47,7 @@ export class BooleanValueObject<T extends any> extends ValueObject<boolean> {
   }
 
   else(fn: () => T): BooleanValueObject<T> {
-    if (this.value) {
+    if (this.valueOf()) {
       return this;
     }
     this._eval = fn();

@@ -3,7 +3,6 @@
 export * from './errors';
 export * from './IEncryptable';
 export * from './IOperable';
-export * from './IStringable';
 export * from './IValidatable';
 export * from './IValueObject';
 export * from './ValueObject';

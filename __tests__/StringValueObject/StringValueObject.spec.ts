@@ -4,7 +4,7 @@ describe("StringValueObject", () => {
   it("should be empty", () => {
     const stringVO = StringValueObject.empty();
 
-    expect(stringVO.value).toBe("");
+    expect(stringVO.valueOf()).toBe("");
   });
 
   it("should create a StringVO from other StringVO", () => {
@@ -12,6 +12,6 @@ describe("StringValueObject", () => {
 
     const stringVO2 = StringValueObject.from(stringVO);
 
-    expect(stringVO2.value).toBe("test");
+    expect(stringVO2.valueOf()).toBe("test");
   });
 });

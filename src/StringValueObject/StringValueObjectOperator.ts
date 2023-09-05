@@ -1,12 +1,39 @@
 import { IOperable } from "../ValueObject/IOperable";
-import { StringValueObject } from "./StringValueObject";
 import { cipher, util } from "node-forge";
 
 export class StringValueObjectOperator implements IOperable<string> {
   constructor(private _key: string, private _iv: string) {}
 
-  add(a: StringValueObject, b: StringValueObject): StringValueObject {
-    return new StringValueObject(a.value + b.value);
+  add(a: string, b: string): string {
+    return a + b;
+  }
+
+  equalTo(a: string, b: string): boolean {
+    return a === b;
+  }
+
+  differsFrom(a: string, b: string): boolean {
+    return a !== b;
+  }
+
+  isBiggerOrEqualThan(a: string, b: string): boolean {
+    return a > b || this.equalTo(a, b);
+  }
+
+  isBiggerThan(a: string, b: string): boolean {
+    return a > b;
+  }
+
+  isLessThan(a: string, b: string): boolean {
+    return a < b;
+  }
+
+  substract(a: string, b: string): string {
+    return a.replace(b, "");
+  }
+
+  times(times: number, x: string): string {
+    return x.repeat(times);
   }
 
   async encrypt(val: string): Promise<string> {

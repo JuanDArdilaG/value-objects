@@ -1,4 +1,3 @@
-import { StringValueObject } from "../StringValueObject";
 import { InvalidArgumentError } from "./errors/InvalidArgumentError";
 import { IOperable } from "./IOperable";
 import { IValidatable } from "./IValidatable";
@@ -10,7 +9,7 @@ export interface PIIOptions {
 }
 
 export interface ValueObjectOptions<T extends Object> {
-  operable: IOperable<T>;
+  operable?: IOperable<T>;
   validatable: IValidatable<T>;
   pii?: PIIOptions;
 }
@@ -24,30 +23,19 @@ export class ValueObject<T extends Object> implements IValueObject<T> {
   }
 
   static from<T extends Object>(other: ValueObject<T>): ValueObject<T> {
-    return new ValueObject<T>(other._options, other.value);
+    return new ValueObject<T>(other._options, other.valueOf());
   }
 
-  get value(): T {
+  valueOf(): T {
     return this._value;
   }
 
-  set value(value: T) {
-    if (!this.validate(value)) {
-      throw new InvalidArgumentError(this.constructor.name, value);
+  equalTo(other: ValueObject<T>): boolean {
+    const isEqual = this._options.operable?.equalTo(this._value, other._value);
+    if (isEqual) {
+      return isEqual;
     }
-    this._value = value;
-  }
-
-  equal(other: IValueObject<Object>): boolean {
-    if (other === null || other === undefined) {
-      return false;
-    }
-
-    if (this.constructor.name !== other.constructor.name) {
-      return false;
-    }
-
-    return this.value === other.value;
+    return this._value === other.valueOf();
   }
 
   isBiggerThan(other: ValueObject<T>): boolean {
@@ -55,19 +43,19 @@ export class ValueObject<T extends Object> implements IValueObject<T> {
       return false;
     }
 
-    if (typeof this.value !== typeof other.value) {
+    if (typeof this.valueOf() !== typeof other.valueOf()) {
       return false;
     }
 
-    return this.value > other.value;
+    return this.valueOf() > other.valueOf();
   }
 
   is(o: T): boolean {
     return this._value === o;
   }
 
-  toString(): StringValueObject {
-    return new StringValueObject(this._value.toString());
+  toString(): string {
+    return this._value.toString();
   }
 
   validate(val: T): Error | void {
@@ -81,20 +69,32 @@ export class ValueObject<T extends Object> implements IValueObject<T> {
   }
 
   add(other: ValueObject<T>): ValueObject<T> {
-    return this._options.operable.add(this, other);
+    const addition = this._options.operable?.add(this._value, other._value);
+    if (addition) {
+      return new ValueObject(this._options, addition);
+    }
+    throw new Error("Method not implemented.");
   }
 
   async encrypt(val: T): Promise<string> {
     if (!this._options.pii) {
       throw new Error("Cannot encrypt non-PII");
     }
-    return this._options.operable.encrypt(val);
+    const encryption = this._options.operable?.encrypt(val);
+    if (encryption) {
+      return encryption;
+    }
+    throw new Error("Method not implemented.");
   }
 
   async decrypt(val: string): Promise<T> {
     if (!this._options.pii) {
       throw new Error("Cannot decrypt non-PII");
     }
-    return this._options.operable.decrypt(val);
+    const decryption = this._options.operable?.decrypt(val);
+    if (decryption) {
+      return decryption;
+    }
+    throw new Error("Method not implemented.");
   }
 }

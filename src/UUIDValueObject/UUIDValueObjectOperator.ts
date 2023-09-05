@@ -1,8 +1,7 @@
 import { StringValueObjectOperator } from "../StringValueObject";
-import { UUIDValueObject } from "./UUIDValueObject";
 
 export class UUIDValueObjectOperator extends StringValueObjectOperator {
-  add(_: UUIDValueObject, __: UUIDValueObject): UUIDValueObject {
+  add(_: string, __: string): string {
     throw new Error("method not implemented.");
   }
 
