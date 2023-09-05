@@ -24,14 +24,6 @@ export class StringValueObject extends ValueObject<string> {
   static empty(): StringValueObject {
     return new StringValueObject("");
   }
-
-  isEmpty(): boolean {
-    return this._value == "";
-  }
-
-  is(value: string): boolean {
-    return this.value === value;
-  }
 }
 
 export const StringLengthOptionsDefault: StringLengthOptions = {

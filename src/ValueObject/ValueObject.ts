@@ -1,3 +1,4 @@
+import { BooleanValueObject } from "../BooleanValueObject";
 import { StringValueObject } from "../StringValueObject";
 import { InvalidArgumentError } from "./errors/InvalidArgumentError";
 import { IOperable } from "./IOperable";
@@ -38,16 +39,8 @@ export class ValueObject<T extends Object> implements IValueObject<T> {
     this._value = value;
   }
 
-  equal(other: IValueObject<Object>): boolean {
-    if (other === null || other === undefined) {
-      return false;
-    }
-
-    if (this.constructor.name !== other.constructor.name) {
-      return false;
-    }
-
-    return this.value === other.value;
+  equalsTo(other: ValueObject<T>): BooleanValueObject<T> {
+    return this._options.operable.equalTo(this, other);
   }
 
   isBiggerThan(other: ValueObject<T>): boolean {

@@ -1,3 +1,4 @@
+import { BooleanValueObject } from "src/BooleanValueObject";
 import { IEncryptable } from "./IEncryptable";
 import { IStringable } from "./IStringable";
 import { IValidatable } from "./IValidatable";
@@ -11,6 +12,6 @@ export interface IValueObject<T extends Object>
   set value(val: T);
   is(o: T): boolean;
   add(other: ValueObject<T>): ValueObject<T>;
-  equal(other: IValueObject<Object>): boolean;
+  equalTo(other: IValueObject<T>): BooleanValueObject<T>;
   isBiggerThan(other: ValueObject<T>): boolean;
 }
