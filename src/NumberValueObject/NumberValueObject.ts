@@ -14,7 +14,7 @@ export class NumberValueObject extends ValueObject<number> {
     );
   }
 
-  empty(): NumberValueObject {
+  static empty(): NumberValueObject {
     return new NumberValueObject(0);
   }
 
