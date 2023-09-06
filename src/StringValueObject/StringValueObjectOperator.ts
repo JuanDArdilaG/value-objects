@@ -1,5 +1,8 @@
+import { BooleanValueObject } from "src/BooleanValueObject";
+import { ValueObject } from "src/ValueObject";
 import { IOperable } from "../ValueObject/IOperable";
 import { cipher, util } from "node-forge";
+import { NumberValueObject } from "src/NumberValueObject";
 
 export class StringValueObjectOperator implements IOperable<string> {
   constructor(private _key: string, private _iv: string) {}
@@ -34,6 +37,54 @@ export class StringValueObjectOperator implements IOperable<string> {
 
   times(times: number, x: string): string {
     return x.repeat(times);
+  }
+
+  equalTo(
+    a: ValueObject<string>,
+    b: ValueObject<string>
+  ): BooleanValueObject<string> {
+    return new BooleanValueObject(a.value === b.value);
+  }
+
+  differsFrom(
+    a: ValueObject<string>,
+    b: ValueObject<string>
+  ): BooleanValueObject<string> {
+    return new BooleanValueObject(a.value !== b.value);
+  }
+
+  isBiggerOrEqualThan(
+    a: ValueObject<string>,
+    b: ValueObject<string>
+  ): BooleanValueObject<string> {
+    return new BooleanValueObject<string>(a.value > b.value).or(
+      this.equalTo(a, b)
+    );
+  }
+
+  isBiggerThan(
+    a: ValueObject<string>,
+    b: ValueObject<string>
+  ): BooleanValueObject<string> {
+    return new BooleanValueObject(a.value > b.value);
+  }
+
+  isLessThan(
+    a: ValueObject<string>,
+    b: ValueObject<string>
+  ): BooleanValueObject<string> {
+    return new BooleanValueObject(a.value < b.value);
+  }
+
+  substract(
+    a: ValueObject<string>,
+    b: ValueObject<string>
+  ): ValueObject<string> {
+    return new StringValueObject(a.value.replace(b.value, ""));
+  }
+
+  times(times: NumberValueObject, x: StringValueObject): StringValueObject {
+    return new StringValueObject(x.value.repeat(times.value));
   }
 
   async encrypt(val: string): Promise<string> {
