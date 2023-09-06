@@ -1,6 +1,6 @@
 {
   "name": "@juandardilag/value-objects",
-  "version": "1.2.7",
+  "version": "1.2.8",
   "description": "Value objects Node/Typescript implementations (classes, types, operations, etc.)",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -9,7 +9,7 @@
     "test:unit": "NODE_ENV=test jest --config jest-unit.json",
     "tsc": "tsc",
     "create-index": "cti create -n ./src",
-    "prepublish": "npm run test && npm run create-index && npx rimraf dist/ && tsc",
+    "prepublish": "npm run create-index && npm run test && npx rimraf dist/ && tsc",
     "pub": "npm i && git add -A && git commit --amend --no-edit && npm publish --access public"
   },
   "keywords": [],

@@ -30,15 +30,18 @@ export class ValueObject<T extends Object> implements IValueObject<T> {
     return this._value;
   }
 
-  equalTo(other: ValueObject<T>): boolean {
-    const isEqual = this._options.operable?.equalTo(this._value, other._value);
+  equalTo(other: IValueObject<T>): boolean {
+    const isEqual = this._options.operable?.equalTo(
+      this._value,
+      other.valueOf()
+    );
     if (isEqual) {
       return isEqual;
     }
     return this._value === other.valueOf();
   }
 
-  isBiggerThan(other: ValueObject<T>): boolean {
+  isBiggerThan(other: IValueObject<T>): boolean {
     if (other === null || other === undefined) {
       return false;
     }
@@ -50,8 +53,8 @@ export class ValueObject<T extends Object> implements IValueObject<T> {
     return this.valueOf() > other.valueOf();
   }
 
-  is(o: T): boolean {
-    return this._value === o;
+  is(o: IValueObject<T>): boolean {
+    return this._value === o.valueOf();
   }
 
   toString(): string {
