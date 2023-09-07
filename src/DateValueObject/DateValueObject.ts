@@ -4,10 +4,10 @@ import { DateValueObjectValidator } from "./DateValueObjectValidator";
 import { DateValueObjectOperator } from "./DateValueObjectOperator";
 
 export class DateValueObject extends ValueObject<Date> {
-  constructor(value: Date | string | number) {
+  constructor(value: Date) {
     super(
       {
-        operable: new DateValueObjectOperator(),
+        operable: new DateValueObjectOperator(value),
         validatable: new DateValueObjectValidator(),
       },
       new Date(value)

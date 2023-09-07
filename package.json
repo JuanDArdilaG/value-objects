@@ -1,6 +1,6 @@
 {
   "name": "@juandardilag/value-objects",
-  "version": "1.2.10",
+  "version": "1.2.11",
   "description": "Value objects Node/Typescript implementations (classes, types, operations, etc.)",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

@@ -9,7 +9,7 @@ export class ArrayValueObject<
     super(
       {
         validatable: new ArrayValueObjectValidator<T>(),
-        operable: new ArrayValueObjectOperator<T>(),
+        operable: new ArrayValueObjectOperator<T>(value),
       },
       value
     );
