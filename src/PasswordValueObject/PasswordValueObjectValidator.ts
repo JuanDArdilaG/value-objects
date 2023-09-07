@@ -1,7 +1,7 @@
 import { StringLengthOptions } from "../StringValueObject/StringValueOptions";
-import { IValidatable } from "../ValueObject/IValidatable";
+import { IValidator } from "../ValueObject/IValidator";
 
-export class PasswordValueObjectValidator implements IValidatable<string> {
+export class PasswordValueObjectValidator implements IValidator<string> {
   constructor(private _encrypted: boolean, _length?: StringLengthOptions) {}
 
   validate(val: string): Error | false | void {

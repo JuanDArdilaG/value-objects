@@ -1,13 +1,14 @@
 import { ValueObject } from "../ValueObject";
-import { IOperable } from "../ValueObject/IOperable";
+import { IArithmeticOperator } from "../ValueObject/IArithmeticOperator";
+import { ArrayValueObject } from "./ArrayValueObject";
 
 export class ArrayValueObjectOperator<T extends ValueObject<Object>>
-  implements IOperable<T[]>
+  implements IArithmeticOperator<T[]>
 {
   constructor(private _value: T[]) {}
 
-  add(other: T[]): T[] {
-    return this._value.concat(other);
+  plus(other: ArrayValueObject<T>): ArrayValueObject<T> {
+    return new ArrayValueObject(this._value.concat(other.valueOf()));
   }
 
   encrypt(_: T[]): Promise<string> {
@@ -18,31 +19,33 @@ export class ArrayValueObjectOperator<T extends ValueObject<Object>>
     throw new Error("Method not implemented.");
   }
 
-  differsFrom(other: T[]): boolean {
-    return this._value !== other;
+  differsFrom(other: ArrayValueObject<T>): boolean {
+    return this._value !== other.valueOf();
   }
 
-  equalTo(other: T[]): boolean {
-    return this._value === other;
+  equalTo(other: ArrayValueObject<T>): boolean {
+    return this._value === other.valueOf();
   }
 
-  isBiggerOrEqualThan(other: T[]): boolean {
-    return this._value >= other;
+  isBiggerOrEqualThan(other: ArrayValueObject<T>): boolean {
+    return this._value >= other.valueOf();
   }
 
-  isBiggerThan(other: T[]): boolean {
-    return this._value > other;
+  isBiggerThan(other: ArrayValueObject<T>): boolean {
+    return this._value > other.valueOf();
   }
 
-  isLessThan(other: T[]): boolean {
-    return this._value < other;
+  isLessThan(other: ArrayValueObject<T>): boolean {
+    return this._value < other.valueOf();
   }
 
-  substract(other: T[]): T[] {
-    return this._value.filter((v) => !other.includes(v));
+  substract(other: ArrayValueObject<T>): ArrayValueObject<T> {
+    return new ArrayValueObject(
+      this._value.filter((v) => !other.valueOf().includes(v))
+    );
   }
 
-  times(times: number, x: T[]): T[] {
-    return Array(times).fill(x).flat();
+  times(times: number): ArrayValueObject<T> {
+    return new ArrayValueObject(Array(times).fill(this._value).flat());
   }
 }

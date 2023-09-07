@@ -1,8 +1,8 @@
-import { IValidatable } from "../ValueObject/IValidatable";
+import { IValidator } from "../ValueObject/IValidator";
 import { StringLengthOptions } from "./StringValueOptions";
 import { InvalidStringLengthError } from "./errors/InvalidStringLengthError";
 
-export class StringValueObjectValidator implements IValidatable<string> {
+export class StringValueObjectValidator implements IValidator<string> {
   constructor(
     private _length: StringLengthOptions = { minLength: 0, maxLength: 100000 }
   ) {}

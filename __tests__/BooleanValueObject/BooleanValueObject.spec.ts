@@ -45,4 +45,11 @@ describe("BooleanValueObject", () => {
     const booleanVO = BooleanValueObject.true().not();
     expect(booleanVO.valueOf()).toBe(false);
   });
+
+  it("should retrive string representation", () => {
+    let booleanVO = BooleanValueObject.true();
+    expect(booleanVO.toString()).toBe("true");
+    booleanVO = BooleanValueObject.false();
+    expect(booleanVO.toString()).toBe("false");
+  });
 });

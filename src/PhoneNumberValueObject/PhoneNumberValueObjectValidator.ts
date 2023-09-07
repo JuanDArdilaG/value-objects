@@ -1,6 +1,6 @@
-import { IValidatable } from "../ValueObject";
+import { IValidator } from "../ValueObject";
 
-export class PhoneNumberValueObjectValidator implements IValidatable<string> {
+export class PhoneNumberValueObjectValidator implements IValidator<string> {
   constructor(private _options?: { required: boolean }) {}
 
   validate(value: string): false | void | Error {

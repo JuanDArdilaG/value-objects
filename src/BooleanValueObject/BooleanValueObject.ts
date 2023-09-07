@@ -1,14 +1,11 @@
 import { ValueObject } from "../ValueObject/ValueObject";
-import { BooleanValueObjectOperator } from "./BooleanValueObjectOperator";
 import { BooleanValueObjectValidator } from "./BooleanValueObjectValidator";
 
 export class BooleanValueObject<T extends any> extends ValueObject<boolean> {
-  private _eval: T = Object.create(null);
   constructor(value: boolean) {
     super(
       {
-        operable: new BooleanValueObjectOperator(value),
-        validatable: new BooleanValueObjectValidator(),
+        validator: new BooleanValueObjectValidator(),
       },
       value
     );
@@ -36,25 +33,5 @@ export class BooleanValueObject<T extends any> extends ValueObject<boolean> {
 
   toString(): string {
     return this.valueOf() ? "true" : "false";
-  }
-
-  then(fn: () => T): BooleanValueObject<T> {
-    if (!this.valueOf()) {
-      return this;
-    }
-    this._eval = fn();
-    return this;
-  }
-
-  else(fn: () => T): BooleanValueObject<T> {
-    if (this.valueOf()) {
-      return this;
-    }
-    this._eval = fn();
-    return this;
-  }
-
-  eval(): T {
-    return this._eval;
   }
 }
