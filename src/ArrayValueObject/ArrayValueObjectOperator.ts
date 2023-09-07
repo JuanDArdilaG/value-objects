@@ -4,8 +4,10 @@ import { IOperable } from "../ValueObject/IOperable";
 export class ArrayValueObjectOperator<T extends ValueObject<Object>>
   implements IOperable<T[]>
 {
-  add(a: T[], b: T[]): T[] {
-    return a.concat(b);
+  constructor(private _value: T[]) {}
+
+  add(other: T[]): T[] {
+    return this._value.concat(other);
   }
 
   encrypt(_: T[]): Promise<string> {
@@ -16,28 +18,28 @@ export class ArrayValueObjectOperator<T extends ValueObject<Object>>
     throw new Error("Method not implemented.");
   }
 
-  differsFrom(a: T[], b: T[]): boolean {
-    return a !== b;
+  differsFrom(other: T[]): boolean {
+    return this._value !== other;
   }
 
-  equalTo(a: T[], b: T[]): boolean {
-    return a === b;
+  equalTo(other: T[]): boolean {
+    return this._value === other;
   }
 
-  isBiggerOrEqualThan(a: T[], b: T[]): boolean {
-    return a >= b;
+  isBiggerOrEqualThan(other: T[]): boolean {
+    return this._value >= other;
   }
 
-  isBiggerThan(a: T[], b: T[]): boolean {
-    return a > b;
+  isBiggerThan(other: T[]): boolean {
+    return this._value > other;
   }
 
-  isLessThan(a: T[], b: T[]): boolean {
-    return a < b;
+  isLessThan(other: T[]): boolean {
+    return this._value < other;
   }
 
-  substract(a: T[], b: T[]): T[] {
-    return a.filter((v) => !b.includes(v));
+  substract(other: T[]): T[] {
+    return this._value.filter((v) => !other.includes(v));
   }
 
   times(times: number, x: T[]): T[] {
