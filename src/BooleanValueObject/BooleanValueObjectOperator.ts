@@ -1,35 +1,37 @@
 import { IOperable } from "../ValueObject/IOperable";
 
 export class BooleanValueObjectOperator implements IOperable<boolean> {
-  add(a: boolean, b: boolean): boolean {
-    return a && b;
+  constructor(private _value: boolean) {}
+
+  add(other: boolean): boolean {
+    return this._value && other;
   }
 
-  substract(a: boolean, b: boolean): boolean {
-    return a || b;
+  substract(other: boolean): boolean {
+    return this._value || other;
   }
 
   times(_times: number, _x: boolean): boolean {
     throw new Error("Method not implemented.");
   }
 
-  equalTo(a: boolean, b: boolean): boolean {
-    return a === b;
+  equalTo(other: boolean): boolean {
+    return this._value === other;
   }
 
-  differsFrom(a: boolean, b: boolean): boolean {
-    return a !== b;
+  differsFrom(other: boolean): boolean {
+    return this._value !== other;
   }
 
-  isBiggerOrEqualThan(_a: boolean, _b: boolean): boolean {
+  isBiggerOrEqualThan(_: boolean): boolean {
     throw new Error("Method not implemented.");
   }
 
-  isBiggerThan(_a: boolean, _b: boolean): boolean {
+  isBiggerThan(_other: boolean): boolean {
     throw new Error("Method not implemented.");
   }
 
-  isLessThan(_a: boolean, _b: boolean): boolean {
+  isLessThan(_other: boolean): boolean {
     throw new Error("Method not implemented.");
   }
 

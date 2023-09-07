@@ -7,7 +7,7 @@ export class BooleanValueObject<T extends any> extends ValueObject<boolean> {
   constructor(value: boolean) {
     super(
       {
-        operable: new BooleanValueObjectOperator(),
+        operable: new BooleanValueObjectOperator(value),
         validatable: new BooleanValueObjectValidator(),
       },
       value
