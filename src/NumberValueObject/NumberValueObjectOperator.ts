@@ -1,36 +1,38 @@
 import { IOperable } from "../ValueObject/IOperable";
 
 export class NumberValueObjectOperator implements IOperable<number> {
-  add(a: number, b: number): number {
-    return a + b;
+  constructor(private _value: number) {}
+
+  add(other: number): number {
+    return this._value + other;
   }
 
-  substract(a: number, b: number): number {
-    return a - b;
+  substract(other: number): number {
+    return this._value - other;
   }
 
-  times(a: number, x: number): number {
-    return a * x;
+  times(x: number): number {
+    return this._value * x;
   }
 
-  equalTo(a: number, b: number): boolean {
-    return a === b;
+  equalTo(other: number): boolean {
+    return this._value === other;
   }
 
-  differsFrom(a: number, b: number): boolean {
-    return a !== b;
+  differsFrom(other: number): boolean {
+    return this._value !== other;
   }
 
-  isLessThan(a: number, b: number): boolean {
-    return a < b;
+  isLessThan(other: number): boolean {
+    return this._value < other;
   }
 
-  isBiggerThan(a: number, b: number): boolean {
-    return a > b;
+  isBiggerThan(other: number): boolean {
+    return this._value > other;
   }
 
-  isBiggerOrEqualThan(a: number, b: number): boolean {
-    return a > b || this.equalTo(a, b);
+  isBiggerOrEqualThan(other: number): boolean {
+    return this.isBiggerThan(other) || this.equalTo(other);
   }
 
   encrypt(_: number): Promise<string> {

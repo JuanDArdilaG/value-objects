@@ -33,10 +33,7 @@ export class ValueObject<T extends Object> implements IValueObject<T> {
   }
 
   equalTo(other: IValueObject<T>): boolean {
-    const isEqual = this._options.operable?.equalTo(
-      this._value,
-      other.valueOf()
-    );
+    const isEqual = this._options.operable?.equalTo(other.valueOf());
     if (isEqual) {
       return isEqual;
     }
@@ -74,31 +71,9 @@ export class ValueObject<T extends Object> implements IValueObject<T> {
   }
 
   add(other: IValueObject<T>): IValueObject<T> {
-    const addition = this._options.operable?.add(this._value, other.valueOf());
+    const addition = this._options.operable?.add(other.valueOf());
     if (addition) {
       return new ValueObject(this._options, addition);
-    }
-    throw new Error("Method not implemented.");
-  }
-
-  async encrypt(val: T): Promise<string> {
-    if (!this._options.pii) {
-      throw new Error("Cannot encrypt non-PII");
-    }
-    const encryption = this._options.operable?.encrypt(val);
-    if (encryption) {
-      return encryption;
-    }
-    throw new Error("Method not implemented.");
-  }
-
-  async decrypt(val: string): Promise<T> {
-    if (!this._options.pii) {
-      throw new Error("Cannot decrypt non-PII");
-    }
-    const decryption = this._options.operable?.decrypt(val);
-    if (decryption) {
-      return decryption;
     }
     throw new Error("Method not implemented.");
   }

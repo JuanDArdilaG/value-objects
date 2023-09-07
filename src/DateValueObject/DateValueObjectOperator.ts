@@ -1,36 +1,38 @@
 import { IOperable } from "../ValueObject/IOperable";
 
 export class DateValueObjectOperator implements IOperable<Date> {
-  add(a: Date, b: Date): Date {
-    return new Date(a.getTime() + b.getTime());
+  constructor(private _value: Date) {}
+
+  add(other: Date): Date {
+    return new Date(this._value.getTime() + other.getTime());
   }
 
-  substract(a: Date, b: Date): Date {
-    return new Date(a.getTime() - b.getTime());
+  substract(other: Date): Date {
+    return new Date(this._value.getTime() - other.getTime());
   }
 
   times(_times: number, _x: Date): Date {
     throw new Error("Method not implemented.");
   }
 
-  equalTo(a: Date, b: Date): boolean {
-    return a.valueOf() === b.valueOf();
+  equalTo(other: Date): boolean {
+    return this._value.valueOf() === other.valueOf();
   }
 
-  differsFrom(a: Date, b: Date): boolean {
-    return a.valueOf() !== b.valueOf();
+  differsFrom(other: Date): boolean {
+    return this._value.valueOf() !== other.valueOf();
   }
 
-  isBiggerOrEqualThan(a: Date, b: Date): boolean {
-    return a.valueOf() >= b.valueOf();
+  isBiggerOrEqualThan(other: Date): boolean {
+    return this._value.valueOf() >= other.valueOf();
   }
 
-  isBiggerThan(a: Date, b: Date): boolean {
-    return a.valueOf() > b.valueOf();
+  isBiggerThan(other: Date): boolean {
+    return this._value.valueOf() > other.valueOf();
   }
 
-  isLessThan(a: Date, b: Date): boolean {
-    return a.valueOf() < b.valueOf();
+  isLessThan(other: Date): boolean {
+    return this._value.valueOf() < other.valueOf();
   }
 
   encrypt(_: Date): Promise<string> {

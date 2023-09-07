@@ -6,7 +6,7 @@ export class NumberValueObject extends ValueObject<number> {
   constructor(_value: number, _options?: Partial<ValueObjectOptions<number>>) {
     super(
       {
-        operable: _options?.operable ?? new NumberValueObjectOperator(),
+        operable: _options?.operable ?? new NumberValueObjectOperator(_value),
         validatable: _options?.validatable ?? new NumberValueObjectValidator(),
         pii: _options?.pii,
       },

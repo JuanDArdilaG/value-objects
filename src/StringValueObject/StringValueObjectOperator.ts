@@ -1,57 +1,37 @@
 import { IOperable } from "../ValueObject/IOperable";
-import { cipher, util } from "node-forge";
 
 export class StringValueObjectOperator implements IOperable<string> {
-  constructor(private _key: string, private _iv: string) {}
+  constructor(private _value: string) {}
 
-  add(a: string, b: string): string {
-    return a + b;
+  add(other: string): string {
+    return this._value + other;
   }
 
-  equalTo(a: string, b: string): boolean {
-    return a === b;
+  equalTo(other: string): boolean {
+    return this._value === other;
   }
 
-  differsFrom(a: string, b: string): boolean {
-    return a !== b;
+  differsFrom(other: string): boolean {
+    return this._value !== other;
   }
 
-  isBiggerOrEqualThan(a: string, b: string): boolean {
-    return a > b || this.equalTo(a, b);
+  isBiggerOrEqualThan(other: string): boolean {
+    return this._value > other || this.equalTo(other);
   }
 
-  isBiggerThan(a: string, b: string): boolean {
-    return a > b;
+  isBiggerThan(other: string): boolean {
+    return this._value > other;
   }
 
-  isLessThan(a: string, b: string): boolean {
-    return a < b;
+  isLessThan(other: string): boolean {
+    return this._value < other;
   }
 
-  substract(a: string, b: string): string {
-    return a.replace(b, "");
+  substract(other: string): string {
+    return this._value.replace(other, "");
   }
 
   times(times: number, x: string): string {
     return x.repeat(times);
-  }
-
-  async encrypt(val: string): Promise<string> {
-    var cipherer = cipher.createCipher("AES-CBC", this._key);
-
-    cipherer.start({ iv: this._iv });
-    cipherer.update(util.createBuffer(util.encodeUtf8(val)));
-    cipherer.finish();
-
-    return cipherer.output.toString();
-  }
-
-  async decrypt(val: string): Promise<string> {
-    var decipher = cipher.createDecipher("AES-CBC", this._key);
-    decipher.start({ iv: this._iv });
-    decipher.update(util.createBuffer(val));
-    decipher.finish();
-
-    return decipher.output.toString();
   }
 }
