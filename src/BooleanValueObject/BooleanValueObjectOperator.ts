@@ -1,22 +1,25 @@
-import { IOperable } from "../ValueObject/IOperable";
+import { IArithmeticOperator } from "../ValueObject/IArithmeticOperator";
+import { BooleanValueObject } from "./BooleanValueObject";
 
-export class BooleanValueObjectOperator implements IOperable<boolean> {
+export class BooleanValueObjectOperator<T extends Object>
+  implements IArithmeticOperator<boolean>
+{
   constructor(private _value: boolean) {}
 
-  add(other: boolean): boolean {
-    return this._value && other;
+  plus(other: BooleanValueObject<T>): BooleanValueObject<T> {
+    return new BooleanValueObject(this._value && other.valueOf());
   }
 
-  substract(other: boolean): boolean {
-    return this._value || other;
+  substract(other: BooleanValueObject<T>): BooleanValueObject<T> {
+    return new BooleanValueObject(this._value || other.valueOf());
   }
 
-  times(_times: number, _x: boolean): boolean {
+  times(_times: number, _x: BooleanValueObject<T>): BooleanValueObject<T> {
     throw new Error("Method not implemented.");
   }
 
-  equalTo(other: boolean): boolean {
-    return this._value === other;
+  equalTo(other: BooleanValueObject<T>): BooleanValueObject<T> {
+    return new BooleanValueObject(this._value === other.valueOf());
   }
 
   differsFrom(other: boolean): boolean {

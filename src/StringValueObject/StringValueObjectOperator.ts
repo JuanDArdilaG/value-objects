@@ -1,10 +1,11 @@
-import { IOperable } from "../ValueObject/IOperable";
+import { IArithmeticOperator } from "../ValueObject/IArithmeticOperator";
+import { StringValueObject } from "./StringValueObject";
 
-export class StringValueObjectOperator implements IOperable<string> {
+export class StringValueObjectOperator implements IArithmeticOperator<string> {
   constructor(private _value: string) {}
 
-  add(other: string): string {
-    return this._value + other;
+  plus(other: StringValueObject): StringValueObject {
+    return new StringValueObject(this._value + other.valueOf());
   }
 
   equalTo(other: string): boolean {
@@ -27,11 +28,11 @@ export class StringValueObjectOperator implements IOperable<string> {
     return this._value < other;
   }
 
-  substract(other: string): string {
-    return this._value.replace(other, "");
+  substract(other: StringValueObject): StringValueObject {
+    return new StringValueObject(this._value.replace(other.valueOf(), ""));
   }
 
-  times(times: number, x: string): string {
-    return x.repeat(times);
+  times(times: number, x: StringValueObject): StringValueObject {
+    return new StringValueObject(x.valueOf().repeat(times));
   }
 }

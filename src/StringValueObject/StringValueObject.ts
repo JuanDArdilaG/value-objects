@@ -3,7 +3,7 @@ import { StringValueDefaultOptions } from "./StringValueOptions";
 
 export class StringValueObject extends ValueObject<string> {
   constructor(_value: string, options?: ValueObjectOptions<string>) {
-    super(options ?? StringValueDefaultOptions(_value), _value);
+    super(options ?? StringValueDefaultOptions, _value);
   }
 
   static empty(): StringValueObject {

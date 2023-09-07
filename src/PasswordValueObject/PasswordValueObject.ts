@@ -4,7 +4,7 @@ import { PasswordValueObjectValidator } from "./PasswordValueObjectValidator";
 export class PasswordValueObject extends StringValueObject {
   constructor(pass: string, encrypted: boolean) {
     super(pass, {
-      validatable: new PasswordValueObjectValidator(encrypted),
+      validator: new PasswordValueObjectValidator(encrypted),
     });
   }
 

@@ -1,4 +1,3 @@
-import { StringValueObjectOperator } from "./StringValueObjectOperator";
 import { StringValueObjectValidator } from "./StringValueObjectValidator";
 
 export type StringLengthOptions = {
@@ -11,7 +10,6 @@ export const StringLengthOptionsDefault: StringLengthOptions = {
   maxLength: 100000,
 };
 
-export const StringValueDefaultOptions = (value: string) => ({
-  operable: new StringValueObjectOperator(value),
-  validatable: new StringValueObjectValidator(StringLengthOptionsDefault),
-});
+export const StringValueDefaultOptions = {
+  validator: new StringValueObjectValidator(StringLengthOptionsDefault),
+};

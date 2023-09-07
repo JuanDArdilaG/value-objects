@@ -1,5 +1,4 @@
 import { ValueObject } from "../ValueObject/ValueObject";
-import { BooleanValueObjectOperator } from "./BooleanValueObjectOperator";
 import { BooleanValueObjectValidator } from "./BooleanValueObjectValidator";
 
 export class BooleanValueObject<T extends any> extends ValueObject<boolean> {
@@ -7,8 +6,7 @@ export class BooleanValueObject<T extends any> extends ValueObject<boolean> {
   constructor(value: boolean) {
     super(
       {
-        operable: new BooleanValueObjectOperator(value),
-        validatable: new BooleanValueObjectValidator(),
+        validator: new BooleanValueObjectValidator(),
       },
       value
     );

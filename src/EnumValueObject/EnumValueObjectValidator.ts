@@ -1,7 +1,7 @@
-import { IValidatable } from "../ValueObject/IValidatable";
+import { IValidator } from "../ValueObject/IValidator";
 
 export class EnumValueObjectValidator<T extends Object>
-  implements IValidatable<T>
+  implements IValidator<T>
 {
   constructor(private _values: T[]) {}
 

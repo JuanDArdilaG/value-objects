@@ -12,7 +12,7 @@ export class RecordValueObject extends ValueObject<RecordValueObjectType> {
   constructor(_value: RecordValueObjectType) {
     super(
       {
-        validatable: new RecordValueObjectValidator(),
+        validator: new RecordValueObjectValidator(),
       },
       _value
     );

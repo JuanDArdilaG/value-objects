@@ -1,18 +1,19 @@
-import { IOperable } from "../ValueObject/IOperable";
+import { IArithmeticOperator } from "../ValueObject/IArithmeticOperator";
+import { NumberValueObject } from "./NumberValueObject";
 
-export class NumberValueObjectOperator implements IOperable<number> {
+export class NumberValueObjectOperator implements IArithmeticOperator<number> {
   constructor(private _value: number) {}
 
-  add(other: number): number {
-    return this._value + other;
+  plus(other: NumberValueObject): NumberValueObject {
+    return new NumberValueObject(this._value + other.valueOf());
   }
 
-  substract(other: number): number {
-    return this._value - other;
+  substract(other: NumberValueObject): NumberValueObject {
+    return new NumberValueObject(this._value - other.valueOf());
   }
 
-  times(x: number): number {
-    return this._value * x;
+  times(x: number): NumberValueObject {
+    return new NumberValueObject(this._value * x.valueOf());
   }
 
   equalTo(other: number): boolean {

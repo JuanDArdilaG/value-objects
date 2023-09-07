@@ -1,17 +1,22 @@
-import { IOperable } from "../ValueObject/IOperable";
+import { IArithmeticOperator } from "../ValueObject/IArithmeticOperator";
+import { DateValueObject } from "./DateValueObject";
 
-export class DateValueObjectOperator implements IOperable<Date> {
+export class DateValueObjectOperator implements IArithmeticOperator<Date> {
   constructor(private _value: Date) {}
 
-  add(other: Date): Date {
-    return new Date(this._value.getTime() + other.getTime());
+  plus(other: DateValueObject): DateValueObject {
+    return new DateValueObject(
+      new Date(this._value.getTime() + other.valueOf().getTime())
+    );
   }
 
-  substract(other: Date): Date {
-    return new Date(this._value.getTime() - other.getTime());
+  substract(other: DateValueObject): DateValueObject {
+    return new DateValueObject(
+      new Date(this._value.getTime() - other.valueOf().getTime())
+    );
   }
 
-  times(_times: number, _x: Date): Date {
+  times(_times: number, _x: DateValueObject): DateValueObject {
     throw new Error("Method not implemented.");
   }
 

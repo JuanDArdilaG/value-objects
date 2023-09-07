@@ -1,6 +1,6 @@
-import { IValidatable } from "../ValueObject/IValidatable";
+import { IValidator } from "../ValueObject/IValidator";
 
-export class NumberValueObjectValidator implements IValidatable<number> {
+export class NumberValueObjectValidator implements IValidator<number> {
   validate(val: number): Error | false | void {
     if (typeof val !== "number") {
       return false;
