@@ -1,6 +1,6 @@
 {
   "name": "@juandardilag/value-objects",
-  "version": "1.2.9",
+  "version": "1.2.10",
   "description": "Value objects Node/Typescript implementations (classes, types, operations, etc.)",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -10,7 +10,7 @@
     "tsc": "tsc",
     "create-index": "cti create -n ./src",
     "prepublish": "npm run create-index && npm run test && npx rimraf dist/ && tsc",
-    "pub": "npm i && git add -A && git commit --amend --no-edit && npm publish --access public"
+    "pub": "npm i && git add -A && git commit --amend --no-edit && npm publish --access public && git push"
   },
   "keywords": [],
   "author": "",

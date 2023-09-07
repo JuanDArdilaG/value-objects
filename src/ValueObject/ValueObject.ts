@@ -15,11 +15,13 @@ export interface ValueObjectOptions<T extends Object> {
 }
 
 export class ValueObject<T extends Object> implements IValueObject<T> {
+  operator: IOperable<T> | undefined;
   constructor(private _options: ValueObjectOptions<T>, protected _value: T) {
     const validation = this.validate(_value);
     if (validation instanceof Error) {
       throw validation;
     }
+    this.operator = _options.operable;
   }
 
   static from<T extends Object>(other: ValueObject<T>): ValueObject<T> {
@@ -71,8 +73,8 @@ export class ValueObject<T extends Object> implements IValueObject<T> {
     }
   }
 
-  add(other: ValueObject<T>): ValueObject<T> {
-    const addition = this._options.operable?.add(this._value, other._value);
+  add(other: IValueObject<T>): IValueObject<T> {
+    const addition = this._options.operable?.add(this._value, other.valueOf());
     if (addition) {
       return new ValueObject(this._options, addition);
     }
