@@ -1,4 +1,4 @@
-import { IValidator } from "src/ValueObject";
+import { IValidator } from "../ValueObject";
 import { IValueObject } from "../ValueObject/IValueObject";
 
 export interface IIdentifier<T extends Object> extends IValueObject<T> {}
