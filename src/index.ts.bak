@@ -1,8 +1,10 @@
 // created from 'create-ts-index'
 
+export * from './AggregateRoot';
 export * from './ArrayValueObject';
 export * from './BooleanValueObject';
 export * from './DateValueObject';
+export * from './DomainEvent';
 export * from './EmailValueObject';
 export * from './EnumValueObject';
 export * from './IdentifierValueObject';

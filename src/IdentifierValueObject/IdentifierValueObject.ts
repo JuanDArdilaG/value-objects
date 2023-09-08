@@ -7,9 +7,11 @@ export class IdentifierValueObject<T extends Object> implements IIdentifier<T> {
   constructor(protected _value: T, protected _validator: IValidator<T>) {
     this.validate(_value);
   }
+
   is(o: IValueObject<T>): boolean {
     return this.valueOf() === o.valueOf();
   }
+
   validate(val: T): false | void | Error {
     return this._validator.validate(val);
   }
