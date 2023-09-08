@@ -1,7 +1,7 @@
-import { IArithmeticOperator } from "../ValueObject/IArithmeticOperator";
+import { IOperator } from "../ValueObject/IArithmeticOperator";
 import { DateValueObject } from "./DateValueObject";
 
-export class DateValueObjectOperator implements IArithmeticOperator<Date> {
+export class DateValueObjectOperator implements IOperator<Date> {
   constructor(private _value: Date) {}
 
   plus(other: DateValueObject): DateValueObject {
@@ -20,24 +20,24 @@ export class DateValueObjectOperator implements IArithmeticOperator<Date> {
     throw new Error("Method not implemented.");
   }
 
-  equalTo(other: Date): boolean {
-    return this._value.valueOf() === other.valueOf();
+  equalTo(other: DateValueObject): boolean {
+    return this._value.valueOf() === other.valueOf().valueOf();
   }
 
-  differsFrom(other: Date): boolean {
-    return this._value.valueOf() !== other.valueOf();
+  differsFrom(other: DateValueObject): boolean {
+    return this._value.valueOf() !== other.valueOf().valueOf();
   }
 
-  isBiggerOrEqualThan(other: Date): boolean {
-    return this._value.valueOf() >= other.valueOf();
+  isBiggerOrEqualThan(other: DateValueObject): boolean {
+    return this._value.valueOf() >= other.valueOf().valueOf();
   }
 
-  isBiggerThan(other: Date): boolean {
-    return this._value.valueOf() > other.valueOf();
+  isBiggerThan(other: DateValueObject): boolean {
+    return this._value.valueOf() > other.valueOf().valueOf();
   }
 
-  isLessThan(other: Date): boolean {
-    return this._value.valueOf() < other.valueOf();
+  isLessThan(other: DateValueObject): boolean {
+    return this._value.valueOf() < other.valueOf().valueOf();
   }
 
   encrypt(_: Date): Promise<string> {

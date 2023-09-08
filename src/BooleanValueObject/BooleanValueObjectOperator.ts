@@ -1,8 +1,8 @@
-import { IArithmeticOperator } from "../ValueObject/IArithmeticOperator";
+import { IOperator } from "../ValueObject/IArithmeticOperator";
 import { BooleanValueObject } from "./BooleanValueObject";
 
 export class BooleanValueObjectOperator<T extends Object>
-  implements IArithmeticOperator<boolean>
+  implements IOperator<boolean>
 {
   constructor(private _value: boolean) {}
 
@@ -18,23 +18,23 @@ export class BooleanValueObjectOperator<T extends Object>
     throw new Error("Method not implemented.");
   }
 
-  equalTo(other: BooleanValueObject<T>): BooleanValueObject<T> {
-    return new BooleanValueObject(this._value === other.valueOf());
+  equalTo(other: BooleanValueObject<T>): boolean {
+    return this._value === other.valueOf();
   }
 
-  differsFrom(other: boolean): boolean {
-    return this._value !== other;
+  differsFrom(other: BooleanValueObject<T>): boolean {
+    return this._value !== other.valueOf();
   }
 
-  isBiggerOrEqualThan(_: boolean): boolean {
+  isBiggerOrEqualThan(_: BooleanValueObject<T>): boolean {
     throw new Error("Method not implemented.");
   }
 
-  isBiggerThan(_other: boolean): boolean {
+  isBiggerThan(_other: BooleanValueObject<T>): boolean {
     throw new Error("Method not implemented.");
   }
 
-  isLessThan(_other: boolean): boolean {
+  isLessThan(_other: BooleanValueObject<T>): boolean {
     throw new Error("Method not implemented.");
   }
 

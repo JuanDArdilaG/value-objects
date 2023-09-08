@@ -1,9 +1,9 @@
 import { ValueObject } from "../ValueObject";
-import { IArithmeticOperator } from "../ValueObject/IArithmeticOperator";
+import { IOperator } from "../ValueObject/IArithmeticOperator";
 import { ArrayValueObject } from "./ArrayValueObject";
 
 export class ArrayValueObjectOperator<T extends ValueObject<Object>>
-  implements IArithmeticOperator<T[]>
+  implements IOperator<T[]>
 {
   constructor(private _value: T[]) {}
 

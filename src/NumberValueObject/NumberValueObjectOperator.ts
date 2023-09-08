@@ -1,7 +1,7 @@
-import { IArithmeticOperator } from "../ValueObject/IArithmeticOperator";
+import { IOperator } from "../ValueObject/IArithmeticOperator";
 import { NumberValueObject } from "./NumberValueObject";
 
-export class NumberValueObjectOperator implements IArithmeticOperator<number> {
+export class NumberValueObjectOperator implements IOperator<number> {
   constructor(private _value: NumberValueObject) {}
 
   plus(other: NumberValueObject): NumberValueObject {
@@ -16,43 +16,31 @@ export class NumberValueObjectOperator implements IArithmeticOperator<number> {
     return new NumberValueObject(this._value.valueOf() * x.valueOf());
   }
 
-  equalTo(other: number): boolean {
-    return this._value.valueOf() === other;
+  equalTo(other: NumberValueObject): boolean {
+    return this._value.valueOf() === other.valueOf();
   }
 
-  differsFrom(other: number): boolean {
-    return this._value.valueOf() !== other;
+  differsFrom(other: NumberValueObject): boolean {
+    return this._value.valueOf() !== other.valueOf();
   }
 
-  isLessThan(other: number): boolean {
-    return this._value.valueOf() < other;
+  isLessThan(other: NumberValueObject): boolean {
+    return this._value.valueOf() < other.valueOf();
   }
 
-  isBiggerThan(other: number): boolean {
-    return this._value.valueOf() > other;
+  isBiggerThan(other: NumberValueObject): boolean {
+    return this._value.valueOf() > other.valueOf();
   }
 
-  isBiggerOrEqualThan(other: number): boolean {
+  isBiggerOrEqualThan(other: NumberValueObject): boolean {
     return this.isBiggerThan(other) || this.equalTo(other);
   }
 
-  encrypt(_: number): Promise<string> {
+  encrypt(_: NumberValueObject): Promise<string> {
     throw new Error("Method not implemented.");
   }
 
   decrypt(_: string): Promise<number> {
     throw new Error("Method not implemented.");
-  }
-
-  isPositive(n: number): boolean {
-    return n > 0;
-  }
-
-  isNegative(n: number): boolean {
-    return n < 0;
-  }
-
-  isZero(n: number): boolean {
-    return n === 0;
   }
 }
