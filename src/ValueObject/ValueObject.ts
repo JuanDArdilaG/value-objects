@@ -20,6 +20,10 @@ export class ValueObject<T extends Object> implements IValueObject<T> {
     }
   }
 
+  get options(): ValueObjectOptions<T> {
+    return this._options;
+  }
+
   static from<T extends Object>(other: ValueObject<T>): ValueObject<T> {
     return new ValueObject<T>(other._options, other.valueOf());
   }
