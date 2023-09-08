@@ -7,6 +7,10 @@ export class ArrayValueObjectOperator<T extends ValueObject<Object>>
 {
   constructor(private _value: T[]) {}
 
+  get value(): T[] {
+    return this._value;
+  }
+
   plus(other: ArrayValueObject<T>): ArrayValueObjectOperator<T> {
     this._value = this._value.concat(other.valueOf());
     return this;

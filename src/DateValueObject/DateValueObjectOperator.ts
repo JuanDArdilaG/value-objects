@@ -4,6 +4,10 @@ import { DateValueObject } from "./DateValueObject";
 export class DateValueObjectOperator implements IOperator<Date> {
   constructor(private _value: Date) {}
 
+  get value(): Date {
+    return this._value;
+  }
+
   plus(other: DateValueObject): DateValueObjectOperator {
     this._value = new Date(this._value.getTime() + other.valueOf().getTime());
     return this;
