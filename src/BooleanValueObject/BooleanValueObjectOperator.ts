@@ -6,15 +6,19 @@ export class BooleanValueObjectOperator<T extends Object>
 {
   constructor(private _value: boolean) {}
 
-  plus(other: BooleanValueObject<T>): BooleanValueObject<T> {
-    return new BooleanValueObject(this._value || other.valueOf());
+  plus(other: BooleanValueObject<T>): BooleanValueObjectOperator<T> {
+    this._value = this._value || other.valueOf();
+    return this;
   }
 
-  substract(_: BooleanValueObject<T>): BooleanValueObject<T> {
+  substract(_: BooleanValueObject<T>): BooleanValueObjectOperator<T> {
     throw new Error("Method not implemented.");
   }
 
-  times(_times: number, _x: BooleanValueObject<T>): BooleanValueObject<T> {
+  times(
+    _times: number,
+    _x: BooleanValueObject<T>
+  ): BooleanValueObjectOperator<T> {
     throw new Error("Method not implemented.");
   }
 

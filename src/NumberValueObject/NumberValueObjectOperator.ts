@@ -4,16 +4,23 @@ import { NumberValueObject } from "./NumberValueObject";
 export class NumberValueObjectOperator implements IOperator<number> {
   constructor(private _value: NumberValueObject) {}
 
-  plus(other: NumberValueObject): NumberValueObject {
-    return new NumberValueObject(this._value.valueOf() + other.valueOf());
+  plus(other: NumberValueObject): NumberValueObjectOperator {
+    this._value = new NumberValueObject(
+      this._value.valueOf() + other.valueOf()
+    );
+    return this;
   }
 
-  substract(other: NumberValueObject): NumberValueObject {
-    return new NumberValueObject(this._value.valueOf() - other.valueOf());
+  substract(other: NumberValueObject): NumberValueObjectOperator {
+    this._value = new NumberValueObject(
+      this._value.valueOf() - other.valueOf()
+    );
+    return this;
   }
 
-  times(x: number): NumberValueObject {
-    return new NumberValueObject(this._value.valueOf() * x.valueOf());
+  times(x: number): NumberValueObjectOperator {
+    this._value = new NumberValueObject(this._value.valueOf() * x.valueOf());
+    return this;
   }
 
   equalTo(other: NumberValueObject): boolean {

@@ -4,8 +4,19 @@ import { StringValueObject } from "./StringValueObject";
 export class StringValueObjectOperator implements IOperator<string> {
   constructor(private _value: string) {}
 
-  plus(other: StringValueObject): StringValueObject {
-    return new StringValueObject(this._value + other.valueOf());
+  plus(other: StringValueObject): StringValueObjectOperator {
+    this._value = this._value + other.valueOf();
+    return this;
+  }
+
+  substract(other: StringValueObject): StringValueObjectOperator {
+    this._value = this._value.replace(other.valueOf(), "");
+    return this;
+  }
+
+  times(times: number, x: StringValueObject): StringValueObjectOperator {
+    this._value = x.valueOf().repeat(times);
+    return this;
   }
 
   equalTo(other: StringValueObject): boolean {
@@ -26,13 +37,5 @@ export class StringValueObjectOperator implements IOperator<string> {
 
   isLessThan(other: StringValueObject): boolean {
     return this._value < other.valueOf();
-  }
-
-  substract(other: StringValueObject): StringValueObject {
-    return new StringValueObject(this._value.replace(other.valueOf(), ""));
-  }
-
-  times(times: number, x: StringValueObject): StringValueObject {
-    return new StringValueObject(x.valueOf().repeat(times));
   }
 }

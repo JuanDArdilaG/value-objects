@@ -4,19 +4,17 @@ import { DateValueObject } from "./DateValueObject";
 export class DateValueObjectOperator implements IOperator<Date> {
   constructor(private _value: Date) {}
 
-  plus(other: DateValueObject): DateValueObject {
-    return new DateValueObject(
-      new Date(this._value.getTime() + other.valueOf().getTime())
-    );
+  plus(other: DateValueObject): DateValueObjectOperator {
+    this._value = new Date(this._value.getTime() + other.valueOf().getTime());
+    return this;
   }
 
-  substract(other: DateValueObject): DateValueObject {
-    return new DateValueObject(
-      new Date(this._value.getTime() - other.valueOf().getTime())
-    );
+  substract(other: DateValueObject): DateValueObjectOperator {
+    this._value = new Date(this._value.getTime() - other.valueOf().getTime());
+    return this;
   }
 
-  times(_times: number, _x: DateValueObject): DateValueObject {
+  times(_times: number, _x: DateValueObject): DateValueObjectOperator {
     throw new Error("Method not implemented.");
   }
 

@@ -7,8 +7,19 @@ export class ArrayValueObjectOperator<T extends ValueObject<Object>>
 {
   constructor(private _value: T[]) {}
 
-  plus(other: ArrayValueObject<T>): ArrayValueObject<T> {
-    return new ArrayValueObject(this._value.concat(other.valueOf()));
+  plus(other: ArrayValueObject<T>): ArrayValueObjectOperator<T> {
+    this._value = this._value.concat(other.valueOf());
+    return this;
+  }
+
+  substract(other: ArrayValueObject<T>): ArrayValueObjectOperator<T> {
+    this._value = this._value.filter((v) => !other.valueOf().includes(v));
+    return this;
+  }
+
+  times(times: number): ArrayValueObjectOperator<T> {
+    this._value = Array(times).fill(this._value).flat();
+    return this;
   }
 
   encrypt(_: T[]): Promise<string> {
@@ -37,15 +48,5 @@ export class ArrayValueObjectOperator<T extends ValueObject<Object>>
 
   isLessThan(other: ArrayValueObject<T>): boolean {
     return this._value < other.valueOf();
-  }
-
-  substract(other: ArrayValueObject<T>): ArrayValueObject<T> {
-    return new ArrayValueObject(
-      this._value.filter((v) => !other.valueOf().includes(v))
-    );
-  }
-
-  times(times: number): ArrayValueObject<T> {
-    return new ArrayValueObject(Array(times).fill(this._value).flat());
   }
 }
