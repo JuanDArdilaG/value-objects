@@ -1,7 +1,7 @@
 import { IValueObject } from "./IValueObject";
 
 export interface IOperator<T extends Object> {
-  get value(): T;
+  get value(): IValueObject<T>;
   plus(other: IValueObject<T>): IOperator<T>;
   substract(other: IValueObject<T>): IOperator<T>;
   times(times: number, x: IValueObject<T>): IOperator<T>;

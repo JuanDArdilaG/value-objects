@@ -4,8 +4,8 @@ import { NumberValueObject } from "./NumberValueObject";
 export class NumberValueObjectOperator implements IOperator<number> {
   constructor(private _value: NumberValueObject) {}
 
-  get value(): number {
-    return this._value.valueOf();
+  get value(): NumberValueObject {
+    return this._value;
   }
 
   plus(other: NumberValueObject): NumberValueObjectOperator {

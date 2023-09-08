@@ -7,8 +7,8 @@ export class ArrayValueObjectOperator<T extends ValueObject<Object>>
 {
   constructor(private _value: T[]) {}
 
-  get value(): T[] {
-    return this._value;
+  get value(): ArrayValueObject<T> {
+    return new ArrayValueObject(this._value);
   }
 
   plus(other: ArrayValueObject<T>): ArrayValueObjectOperator<T> {

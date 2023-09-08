@@ -6,8 +6,8 @@ export class BooleanValueObjectOperator<T extends Object>
 {
   constructor(private _value: boolean) {}
 
-  get value(): boolean {
-    return this._value;
+  get value(): BooleanValueObject<T> {
+    return new BooleanValueObject<T>(this._value);
   }
 
   plus(other: BooleanValueObject<T>): BooleanValueObjectOperator<T> {

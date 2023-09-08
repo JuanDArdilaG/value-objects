@@ -4,8 +4,8 @@ import { StringValueObject } from "./StringValueObject";
 export class StringValueObjectOperator implements IOperator<string> {
   constructor(private _value: string) {}
 
-  get value(): string {
-    return this._value;
+  get value(): StringValueObject {
+    return new StringValueObject(this._value);
   }
 
   plus(other: StringValueObject): StringValueObjectOperator {
