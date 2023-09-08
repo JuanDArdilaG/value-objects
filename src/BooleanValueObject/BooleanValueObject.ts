@@ -34,4 +34,18 @@ export class BooleanValueObject<T extends any> extends ValueObject<boolean> {
   toString(): string {
     return this.valueOf() ? "true" : "false";
   }
+
+  then<T>(fn: () => T): T | undefined {
+    if (this.valueOf()) {
+      return fn();
+    }
+    return undefined;
+  }
+
+  else<T>(fn: () => T): T | undefined {
+    if (!this.valueOf()) {
+      return fn();
+    }
+    return undefined;
+  }
 }
