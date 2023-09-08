@@ -1,9 +1,7 @@
 import { IArithmeticOperator } from "../ValueObject/IArithmeticOperator";
 import { NumberValueObject } from "./NumberValueObject";
 
-export type NumberValueObjectOperator = IArithmeticOperator<number>;
-
-export class NumberValueObjectOperator2 implements IArithmeticOperator<number> {
+export class NumberValueObjectOperator implements IArithmeticOperator<number> {
   constructor(private _value: NumberValueObject) {}
 
   plus(other: NumberValueObject): NumberValueObject {
