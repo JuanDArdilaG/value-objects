@@ -1,8 +1,20 @@
+import { IValidator } from "src/ValueObject";
 import { IValueObject } from "../ValueObject/IValueObject";
-import { StringValueObject } from "../StringValueObject/StringValueObject";
 
-export interface IIdentifier extends IValueObject<string> {}
+export interface IIdentifier<T extends Object> extends IValueObject<T> {}
 
-export abstract class IdentifierValueObject
-  extends StringValueObject
-  implements IIdentifier {}
+export class IdentifierValueObject<T extends Object> implements IIdentifier<T> {
+  constructor(protected _value: T, protected _validator: IValidator<T>) {
+    this.validate(_value);
+  }
+  is(o: IValueObject<T>): boolean {
+    return this.valueOf() === o.valueOf();
+  }
+  validate(val: T): false | void | Error {
+    return this._validator.validate(val);
+  }
+
+  valueOf(): T {
+    return this._value;
+  }
+}

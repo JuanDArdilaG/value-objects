@@ -19,4 +19,16 @@ export class NumberValueObject extends ValueObject<number> {
   static zero(): NumberValueObject {
     return new NumberValueObject(0);
   }
+
+  isPositive(): boolean {
+    return this._value > 0;
+  }
+
+  isNegative(): boolean {
+    return this._value < 0;
+  }
+
+  isZero(): boolean {
+    return this._value === 0;
+  }
 }
