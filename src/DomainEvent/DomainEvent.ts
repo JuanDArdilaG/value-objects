@@ -1,4 +1,4 @@
-import { UUIDValueObject } from "src/UUIDValueObject";
+import { UUIDValueObject } from "../UUIDValueObject";
 
 export abstract class DomainEvent {
   static EVENT_NAME: string;
