@@ -12,6 +12,7 @@ export * from './JWTAccessTokenValueObject';
 export * from './NumberValueObject';
 export * from './PasswordValueObject';
 export * from './PhoneNumberValueObject';
+export * from './PriceValueObject';
 export * from './RecordValueObject';
 export * from './StringValueObject';
 export * from './UUIDValueObject';
