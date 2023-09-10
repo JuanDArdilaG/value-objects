@@ -1,4 +1,5 @@
 import { ValueObject } from "../ValueObject";
+import { NoCryptPasswordCrypter } from "./NoCryptPasswordCrypter";
 import { PasswordCrypter } from "./PasswordCrypter";
 import { PasswordValueObjectValidator } from "./PasswordValueObjectValidator";
 
@@ -8,7 +9,10 @@ export type TPasswordValueObject = {
 };
 
 export class PasswordValueObject extends ValueObject<TPasswordValueObject> {
-  constructor(value: TPasswordValueObject, private _crypter: PasswordCrypter) {
+  constructor(
+    value: TPasswordValueObject,
+    private _crypter: PasswordCrypter = new NoCryptPasswordCrypter()
+  ) {
     super(
       {
         validator: new PasswordValueObjectValidator(),
@@ -32,7 +36,7 @@ export class PasswordValueObject extends ValueObject<TPasswordValueObject> {
   }
 
   async encrypt(): Promise<void> {
-    if (this.valueOf().isEncrypted) {
+    if (this.valueOf().isEncrypted || !this._crypter) {
       return;
     }
     const encrypted = await this._crypter.encrypt(this.valueOf().value);
@@ -41,7 +45,7 @@ export class PasswordValueObject extends ValueObject<TPasswordValueObject> {
   }
 
   async check(plain: string): Promise<boolean> {
-    if (!this.valueOf().isEncrypted) {
+    if (!this.valueOf().isEncrypted || !this._crypter) {
       return this.valueOf().value === plain;
     }
     const ok = await this._crypter.check(this.valueOf().value, plain);
