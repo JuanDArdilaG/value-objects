@@ -33,4 +33,15 @@ export class PasswordValueObject extends ValueObject<TPasswordValueObject> {
     this._value.isEncrypted = true;
     this._value.value = encrypted;
   }
+
+  async check(plain: string): Promise<boolean> {
+    if (!this.valueOf().isEncrypted) {
+      return this.valueOf().value === plain;
+    }
+    const ok = await argon2.verify(this._value.value, plain);
+    if (!ok) {
+      throw new Error("invalid password");
+    }
+    return ok;
+  }
 }

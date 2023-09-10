@@ -1,7 +1,7 @@
 {
   "name": "@juandardilag/value-objects",
-  "version": "1.3.0-alpha.13",
-  "description": "Value objects Node/Typescript implementations (classes, types, operations, etc.)",
+  "version": "1.3.0-alpha.14",
+  "description": "DDD Value Objects Node/Typescript implementations (classes, types, operations, etc.)",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
