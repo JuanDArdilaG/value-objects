@@ -21,7 +21,7 @@ export class PasswordValueObject extends ValueObject<TPasswordValueObject> {
     );
   }
 
-  static raw(pass: string, crypter: PasswordCrypter): PasswordValueObject {
+  static raw(pass: string, crypter?: PasswordCrypter): PasswordValueObject {
     return new PasswordValueObject(
       { value: pass, isEncrypted: false },
       crypter
@@ -30,7 +30,7 @@ export class PasswordValueObject extends ValueObject<TPasswordValueObject> {
 
   static encrypted(
     pass: string,
-    crypter: PasswordCrypter
+    crypter?: PasswordCrypter
   ): PasswordValueObject {
     return new PasswordValueObject({ value: pass, isEncrypted: true }, crypter);
   }

@@ -1,8 +1,3 @@
-import { IValidator } from "../ValueObject";
-import { TPriceValueObject } from "./PriceValueObject";
+import { NumberValueObjectValidator } from "../NumberValueObject";
 
-export class PriceValueObjectValidator
-  implements IValidator<TPriceValueObject>
-{
-  validate(_: TPriceValueObject): false | void | Error {}
-}
+export class PriceValueObjectValidator extends NumberValueObjectValidator {}

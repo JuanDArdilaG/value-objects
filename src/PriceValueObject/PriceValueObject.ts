@@ -1,4 +1,4 @@
-import { ValueObject } from "../ValueObject";
+import { NumberValueObject } from "../NumberValueObject";
 import { PriceValueObjectValidator } from "./PriceValueObjectValidator";
 
 export type TPriceValueObject = {
@@ -6,14 +6,11 @@ export type TPriceValueObject = {
   strPrice: string;
 };
 
-export class PriceValueObject extends ValueObject<TPriceValueObject> {
+export class PriceValueObject extends NumberValueObject {
   constructor(readonly price: number, readonly strPrice: string) {
-    super(
-      {
-        validator: new PriceValueObjectValidator(),
-      },
-      { numPrice: price, strPrice }
-    );
+    super(price, {
+      validator: new PriceValueObjectValidator(),
+    });
   }
 
   static parseInput(
