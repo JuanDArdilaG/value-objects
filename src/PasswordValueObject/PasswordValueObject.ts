@@ -1,6 +1,6 @@
 import { ValueObject } from "../ValueObject";
+import { PasswordCrypter } from "./PasswordCrypter";
 import { PasswordValueObjectValidator } from "./PasswordValueObjectValidator";
-import argon2 from "argon2";
 
 export type TPasswordValueObject = {
   value: string;
@@ -8,7 +8,7 @@ export type TPasswordValueObject = {
 };
 
 export class PasswordValueObject extends ValueObject<TPasswordValueObject> {
-  constructor(value: TPasswordValueObject) {
+  constructor(value: TPasswordValueObject, private _crypter: PasswordCrypter) {
     super(
       {
         validator: new PasswordValueObjectValidator(),
@@ -17,19 +17,25 @@ export class PasswordValueObject extends ValueObject<TPasswordValueObject> {
     );
   }
 
-  static raw(pass: string): PasswordValueObject {
-    return new PasswordValueObject({ value: pass, isEncrypted: false });
+  static raw(pass: string, crypter: PasswordCrypter): PasswordValueObject {
+    return new PasswordValueObject(
+      { value: pass, isEncrypted: false },
+      crypter
+    );
   }
 
-  static encrypted(pass: string): PasswordValueObject {
-    return new PasswordValueObject({ value: pass, isEncrypted: true });
+  static encrypted(
+    pass: string,
+    crypter: PasswordCrypter
+  ): PasswordValueObject {
+    return new PasswordValueObject({ value: pass, isEncrypted: true }, crypter);
   }
 
   async encrypt(): Promise<void> {
     if (this.valueOf().isEncrypted) {
       return;
     }
-    const encrypted = await argon2.hash(this.valueOf().value);
+    const encrypted = await this._crypter.encrypt(this.valueOf().value);
     this._value.isEncrypted = true;
     this._value.value = encrypted;
   }
@@ -38,7 +44,7 @@ export class PasswordValueObject extends ValueObject<TPasswordValueObject> {
     if (!this.valueOf().isEncrypted) {
       return this.valueOf().value === plain;
     }
-    const ok = await argon2.verify(this._value.value, plain);
+    const ok = await this._crypter.check(this.valueOf().value, plain);
     if (!ok) {
       throw new Error("invalid password");
     }
