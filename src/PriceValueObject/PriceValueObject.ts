@@ -7,10 +7,14 @@ export type TPriceValueObject = {
 };
 
 export class PriceValueObject extends NumberValueObject {
-  constructor(readonly price: number, readonly strPrice: string) {
+  constructor(price: number) {
     super(price, {
       validator: new PriceValueObjectValidator(),
     });
+  }
+
+  toStrPrice(digits: number, sign: boolean = false): string {
+    return PriceValueObject._priceToString(this._value, digits, sign);
   }
 
   static parseInput(
@@ -24,11 +28,9 @@ export class PriceValueObject extends NumberValueObject {
     inputElement.oninput = (e) => {
       e.preventDefault();
       const parsedValue = PriceValueObject.fromString(
-        (e.currentTarget as HTMLInputElement).value,
-        sign,
-        digits
+        (e.currentTarget as HTMLInputElement).value
       );
-      inputElement.value = parsedValue.strPrice;
+      inputElement.value = parsedValue.toStrPrice(digits, sign);
       if (digits && inputElement.selectionStart) {
         inputElement.setSelectionRange(
           (e.currentTarget as HTMLInputElement).value.length - digits - 1,
@@ -40,24 +42,8 @@ export class PriceValueObject extends NumberValueObject {
     };
   }
 
-  static toString(price: number, sign: boolean = false, digits: number = 2) {
-    if (!price) {
-      price = 0;
-    }
-    return new PriceValueObject(
-      price,
-      this._priceToString(price, digits, sign)
-    );
-  }
-
-  static fromString(
-    strPrice: string,
-    sign: boolean = false,
-    digits: number = 2
-  ) {
-    const price = PriceValueObject._stringToPrice(strPrice);
-    const str = PriceValueObject._priceToString(price, digits, sign);
-    return new PriceValueObject(price, str);
+  static fromString(strPrice: string): PriceValueObject {
+    return new PriceValueObject(PriceValueObject._stringToPrice(strPrice));
   }
 
   private static _priceToString(
