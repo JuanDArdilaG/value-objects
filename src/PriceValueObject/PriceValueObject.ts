@@ -13,6 +13,10 @@ export class PriceValueObject extends NumberValueObject {
     });
   }
 
+  static zero(): PriceValueObject {
+    return new PriceValueObject(0);
+  }
+
   toStrPrice(digits: number, sign: boolean = false): string {
     return PriceValueObject._priceToString(this._value, digits, sign);
   }
