@@ -1,5 +1,4 @@
 import { ValueObject } from "../ValueObject";
-import { NoCryptPasswordCrypter } from "./NoCryptPasswordCrypter";
 import { PasswordCrypter } from "./PasswordCrypter";
 import { PasswordValueObjectValidator } from "./PasswordValueObjectValidator";
 
@@ -9,7 +8,7 @@ export type TPasswordValueObject = {
 };
 
 export class PasswordValueObject extends ValueObject<TPasswordValueObject> {
-  private static _crypter: PasswordCrypter = new NoCryptPasswordCrypter();
+  private static _crypter: PasswordCrypter;
   constructor(value: TPasswordValueObject) {
     super(
       {
