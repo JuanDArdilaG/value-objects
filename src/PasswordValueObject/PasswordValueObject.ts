@@ -9,10 +9,8 @@ export type TPasswordValueObject = {
 };
 
 export class PasswordValueObject extends ValueObject<TPasswordValueObject> {
-  constructor(
-    value: TPasswordValueObject,
-    private _crypter: PasswordCrypter = new NoCryptPasswordCrypter()
-  ) {
+  private static _crypter: PasswordCrypter = new NoCryptPasswordCrypter();
+  constructor(value: TPasswordValueObject) {
     super(
       {
         validator: new PasswordValueObjectValidator(),
@@ -21,34 +19,37 @@ export class PasswordValueObject extends ValueObject<TPasswordValueObject> {
     );
   }
 
-  static raw(pass: string, crypter?: PasswordCrypter): PasswordValueObject {
-    return new PasswordValueObject(
-      { value: pass, isEncrypted: false },
-      crypter
-    );
+  static setCrypter(crypter: PasswordCrypter): void {
+    PasswordValueObject._crypter = crypter;
   }
 
-  static encrypted(
-    pass: string,
-    crypter?: PasswordCrypter
-  ): PasswordValueObject {
-    return new PasswordValueObject({ value: pass, isEncrypted: true }, crypter);
+  static raw(pass: string): PasswordValueObject {
+    return new PasswordValueObject({ value: pass, isEncrypted: false });
+  }
+
+  static encrypted(pass: string): PasswordValueObject {
+    return new PasswordValueObject({ value: pass, isEncrypted: true });
   }
 
   async encrypt(): Promise<void> {
-    if (this.valueOf().isEncrypted || !this._crypter) {
+    if (this.valueOf().isEncrypted || !PasswordValueObject._crypter) {
       return;
     }
-    const encrypted = await this._crypter.encrypt(this.valueOf().value);
+    const encrypted = await PasswordValueObject._crypter.encrypt(
+      this.valueOf().value
+    );
     this._value.isEncrypted = true;
     this._value.value = encrypted;
   }
 
   async check(plain: string): Promise<boolean> {
-    if (!this.valueOf().isEncrypted || !this._crypter) {
+    if (!this.valueOf().isEncrypted || !PasswordValueObject._crypter) {
       return this.valueOf().value === plain;
     }
-    const ok = await this._crypter.check(this.valueOf().value, plain);
+    const ok = await PasswordValueObject._crypter.check(
+      this.valueOf().value,
+      plain
+    );
     if (!ok) {
       throw new Error("invalid password");
     }
