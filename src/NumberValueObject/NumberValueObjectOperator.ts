@@ -2,7 +2,7 @@ import { IOperator } from "../ValueObject/IArithmeticOperator";
 import { NumberValueObject } from "./NumberValueObject";
 
 export class NumberValueObjectOperator implements IOperator<number> {
-  constructor(private _value: NumberValueObject) {}
+  constructor(protected _value: NumberValueObject) {}
 
   get value(): NumberValueObject {
     return this._value;
