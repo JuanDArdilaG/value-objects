@@ -17,14 +17,14 @@ export class PriceValueObject extends NumberValueObject {
     return new PriceValueObject(0);
   }
 
-  toStrPrice(digits: number, sign: boolean = false): string {
+  toStrPrice(sign: boolean = false, digits: number = 0): string {
     return PriceValueObject._priceToString(this._value, digits, sign);
   }
 
   static parseInput(
     inputElement: HTMLInputElement | null,
-    sign = false,
-    digits = 2
+    sign = true,
+    digits = 0
   ) {
     if (!inputElement) {
       return;
@@ -34,7 +34,7 @@ export class PriceValueObject extends NumberValueObject {
       const parsedValue = PriceValueObject.fromString(
         (e.currentTarget as HTMLInputElement).value
       );
-      inputElement.value = parsedValue.toStrPrice(digits, sign);
+      inputElement.value = parsedValue.toStrPrice(sign, digits);
       if (digits && inputElement.selectionStart) {
         inputElement.setSelectionRange(
           (e.currentTarget as HTMLInputElement).value.length - digits - 1,
