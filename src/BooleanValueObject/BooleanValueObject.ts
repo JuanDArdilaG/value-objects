@@ -1,7 +1,8 @@
 import { ValueObject } from "../ValueObject/ValueObject";
 import { BooleanValueObjectValidator } from "./BooleanValueObjectValidator";
 
-export class BooleanValueObject<T extends any> extends ValueObject<boolean> {
+export class BooleanValueObject extends ValueObject<boolean> {
+  private _fn: () => any = () => {};
   constructor(value: boolean) {
     super(
       {
@@ -11,23 +12,23 @@ export class BooleanValueObject<T extends any> extends ValueObject<boolean> {
     );
   }
 
-  static true<T extends any>(): BooleanValueObject<T> {
-    return new BooleanValueObject<T>(true);
+  static true(): BooleanValueObject {
+    return new BooleanValueObject(true);
   }
 
-  static false<T extends any>(): BooleanValueObject<T> {
-    return new BooleanValueObject<T>(false);
+  static false(): BooleanValueObject {
+    return new BooleanValueObject(false);
   }
 
-  or(other: BooleanValueObject<T>): BooleanValueObject<T> {
+  or(other: BooleanValueObject): BooleanValueObject {
     return new BooleanValueObject(this.valueOf() || other.valueOf());
   }
 
-  and(other: BooleanValueObject<T>): BooleanValueObject<T> {
+  and(other: BooleanValueObject): BooleanValueObject {
     return new BooleanValueObject(this.valueOf() && other.valueOf());
   }
 
-  not(): BooleanValueObject<T> {
+  not(): BooleanValueObject {
     return new BooleanValueObject(!this.valueOf());
   }
 
@@ -35,17 +36,21 @@ export class BooleanValueObject<T extends any> extends ValueObject<boolean> {
     return this.valueOf() ? "true" : "false";
   }
 
-  then<T>(fn: () => T): T | undefined {
+  then<T>(fn: () => T): BooleanValueObject {
     if (this.valueOf()) {
-      return fn();
+      this._fn = fn;
     }
-    return undefined;
+    return this;
   }
 
-  else<T>(fn: () => T): T | undefined {
+  else<T>(fn: () => T): BooleanValueObject {
     if (!this.valueOf()) {
-      return fn();
+      this._fn = fn;
     }
-    return undefined;
+    return this;
+  }
+
+  eval<T>(): T {
+    return this._fn();
   }
 }

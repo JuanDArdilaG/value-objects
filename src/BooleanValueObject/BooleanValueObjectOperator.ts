@@ -1,48 +1,43 @@
 import { IOperator } from "../ValueObject/IArithmeticOperator";
 import { BooleanValueObject } from "./BooleanValueObject";
 
-export class BooleanValueObjectOperator<T extends Object>
-  implements IOperator<boolean>
-{
+export class BooleanValueObjectOperator implements IOperator<boolean> {
   constructor(private _value: boolean) {}
 
-  get value(): BooleanValueObject<T> {
-    return new BooleanValueObject<T>(this._value);
+  get value(): BooleanValueObject {
+    return new BooleanValueObject(this._value);
   }
 
-  plus(other: BooleanValueObject<T>): BooleanValueObjectOperator<T> {
+  plus(other: BooleanValueObject): BooleanValueObjectOperator {
     this._value = this._value || other.valueOf();
     return this;
   }
 
-  substract(_: BooleanValueObject<T>): BooleanValueObjectOperator<T> {
+  substract(_: BooleanValueObject): BooleanValueObjectOperator {
     throw new Error("Method not implemented.");
   }
 
-  times(
-    _times: number,
-    _x: BooleanValueObject<T>
-  ): BooleanValueObjectOperator<T> {
+  times(_times: number, _x: BooleanValueObject): BooleanValueObjectOperator {
     throw new Error("Method not implemented.");
   }
 
-  equalTo(other: BooleanValueObject<T>): boolean {
+  equalTo(other: BooleanValueObject): boolean {
     return this._value === other.valueOf();
   }
 
-  differsFrom(other: BooleanValueObject<T>): boolean {
+  differsFrom(other: BooleanValueObject): boolean {
     return this._value !== other.valueOf();
   }
 
-  isBiggerOrEqualThan(_: BooleanValueObject<T>): boolean {
+  isBiggerOrEqualThan(_: BooleanValueObject): boolean {
     throw new Error("Method not implemented.");
   }
 
-  isBiggerThan(_other: BooleanValueObject<T>): boolean {
+  isBiggerThan(_other: BooleanValueObject): boolean {
     throw new Error("Method not implemented.");
   }
 
-  isLessThan(_other: BooleanValueObject<T>): boolean {
+  isLessThan(_other: BooleanValueObject): boolean {
     throw new Error("Method not implemented.");
   }
 

@@ -6,25 +6,25 @@ import {
 describe("plus", () => {
   it("true + true", () => {
     const operator = new BooleanValueObjectOperator(true);
-    const result = operator.plus(BooleanValueObject.true());
+    const result = operator.plus(BooleanValueObject.true()).value;
     expect(result.valueOf()).toBe(true);
   });
 
   it("true + false", () => {
     const operator = new BooleanValueObjectOperator(true);
-    const result = operator.plus(BooleanValueObject.false());
+    const result = operator.plus(BooleanValueObject.false()).value;
     expect(result.valueOf()).toBe(true);
   });
 
   it("false + true", () => {
     const operator = new BooleanValueObjectOperator(false);
-    const result = operator.plus(BooleanValueObject.true());
+    const result = operator.plus(BooleanValueObject.true()).value;
     expect(result.valueOf()).toBe(true);
   });
 
   it("false + false", () => {
     const operator = new BooleanValueObjectOperator(false);
-    const result = operator.plus(BooleanValueObject.false());
+    const result = operator.plus(BooleanValueObject.false()).value;
     expect(result.valueOf()).toBe(false);
   });
 });
