@@ -17,7 +17,7 @@ export class PriceValueObject extends NumberValueObject {
     return new PriceValueObject(0);
   }
 
-  toStrPrice(sign: boolean = false, digits: number = 0): string {
+  toStrPrice(sign: boolean = true, digits: number = 0): string {
     return PriceValueObject._priceToString(this._value, digits, sign);
   }
 

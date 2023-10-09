@@ -20,6 +20,10 @@ export class NumberValueObject extends ValueObject<number> {
     return new NumberValueObject(0);
   }
 
+  negate(): NumberValueObject {
+    return new NumberValueObject(-this._value);
+  }
+
   isPositive(): boolean {
     return this._value > 0;
   }

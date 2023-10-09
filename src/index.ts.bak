@@ -18,4 +18,3 @@ export * from './RecordValueObject';
 export * from './StringValueObject';
 export * from './UUIDValueObject';
 export * from './ValueObject';
-export * from './UndefinableType';
