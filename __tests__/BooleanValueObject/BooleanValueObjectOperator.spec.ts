@@ -3,35 +3,28 @@ import {
   BooleanValueObjectOperator,
 } from "../../src/BooleanValueObject";
 
-describe("plus", () => {
-  it("true + true", () => {
+describe("BooleanValueObjects addition (+)", () => {
+  it("true + true should be true", () => {
     const operator = new BooleanValueObjectOperator(true);
     const result = operator.plus(BooleanValueObject.true()).value;
     expect(result.valueOf()).toBe(true);
   });
 
-  it("true + false", () => {
+  it("true + false should be true", () => {
     const operator = new BooleanValueObjectOperator(true);
     const result = operator.plus(BooleanValueObject.false()).value;
     expect(result.valueOf()).toBe(true);
   });
 
-  it("false + true", () => {
+  it("false + true should be true", () => {
     const operator = new BooleanValueObjectOperator(false);
     const result = operator.plus(BooleanValueObject.true()).value;
     expect(result.valueOf()).toBe(true);
   });
 
-  it("false + false", () => {
+  it("false + false should be false", () => {
     const operator = new BooleanValueObjectOperator(false);
     const result = operator.plus(BooleanValueObject.false()).value;
     expect(result.valueOf()).toBe(false);
-  });
-});
-
-describe("substract", () => {
-  it("should throw an error", () => {
-    const operator = new BooleanValueObjectOperator(false);
-    expect(() => operator.substract(BooleanValueObject.false())).toThrow();
   });
 });

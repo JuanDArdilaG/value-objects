@@ -1,52 +1,52 @@
 import { BooleanValueObject } from "../../src/BooleanValueObject";
 
 describe("BooleanValueObject", () => {
-  it("should be true", () => {
+  it("named constructor should return true vo", () => {
     const booleanVO = BooleanValueObject.true();
     expect(booleanVO.valueOf()).toBe(true);
   });
 
-  it("should be false", () => {
+  it("named constructor should return false vo", () => {
     const booleanVO = BooleanValueObject.false();
     expect(booleanVO.valueOf()).toBe(false);
   });
 
-  it("should apply true or false equal true", () => {
+  it("true or false should should be true", () => {
     const booleanVO = BooleanValueObject.true().or(BooleanValueObject.false());
     expect(booleanVO.valueOf()).toBe(true);
   });
 
-  it("should apply true or true equal true", () => {
+  it("true or true should should be true", () => {
     const booleanVO = BooleanValueObject.true().or(BooleanValueObject.true());
     expect(booleanVO.valueOf()).toBe(true);
   });
 
-  it("should apply false or false equal false", () => {
+  it("false or false should should be false", () => {
     const booleanVO = BooleanValueObject.false().or(BooleanValueObject.false());
     expect(booleanVO.valueOf()).toBe(false);
   });
 
-  it("should apply false and true equal false", () => {
+  it("false and true should should be false", () => {
     const booleanVO = BooleanValueObject.false().and(BooleanValueObject.true());
     expect(booleanVO.valueOf()).toBe(false);
   });
 
-  it("should apply true and true equal true", () => {
+  it("true and true should should be true", () => {
     const booleanVO = BooleanValueObject.true().and(BooleanValueObject.true());
     expect(booleanVO.valueOf()).toBe(true);
   });
 
-  it("should apply not false equal true", () => {
+  it("not false should be true", () => {
     const booleanVO = BooleanValueObject.false().not();
     expect(booleanVO.valueOf()).toBe(true);
   });
 
-  it("should apply not true equal false", () => {
+  it("not true should be false", () => {
     const booleanVO = BooleanValueObject.true().not();
     expect(booleanVO.valueOf()).toBe(false);
   });
 
-  it("should retrive string representation", () => {
+  it("should retrive string representation of boolean value", () => {
     let booleanVO = BooleanValueObject.true();
     expect(booleanVO.toString()).toBe("true");
     booleanVO = BooleanValueObject.false();
