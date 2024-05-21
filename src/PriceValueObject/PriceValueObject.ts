@@ -21,29 +21,40 @@ export class PriceValueObject extends NumberValueObject {
     return new PriceValueObject(-this._value);
   }
 
-  toStrPrice(sign: boolean = true, digits: number = 0): string {
-    return PriceValueObject._priceToString(this._value, digits, sign);
+  _addCommas(input: string) {
+    let inputParts = input.split(".");
+    let integerPart = inputParts[0];
+    let decimalPart = inputParts.length > 1 ? "." + inputParts[1] : "";
+    let rgx = /(\d+)(\d{3})/;
+    while (rgx.test(integerPart)) {
+      integerPart = integerPart.replace(rgx, "$1,$2");
+    }
+    return integerPart + decimalPart;
+  }
+
+  toString(sign: boolean = true, digits: number = 0): string {
+    let formatted = this._addCommas(`${this._value.toFixed(digits)}`);
+    if (sign && this._value < 0) {
+      formatted = `-$${formatted.slice(1, formatted.length)}`;
+    }
+    return formatted;
   }
 
   static parseInput(
-    inputElement: HTMLInputElement | null,
-    sign = true,
-    digits = 0
+    inputElement: HTMLInputElement,
+    hasSign = true,
+    digitsCount = 0
   ) {
-    if (!inputElement) {
-      return;
-    }
     inputElement.oninput = (e) => {
       e.preventDefault();
-      const parsedValue = PriceValueObject.fromString(
+      inputElement.value = PriceValueObject.fromString(
         (e.currentTarget as HTMLInputElement).value
-      );
-      inputElement.value = parsedValue.toStrPrice(sign, digits);
-      if (digits && inputElement.selectionStart) {
-        inputElement.setSelectionRange(
-          (e.currentTarget as HTMLInputElement).value.length - digits - 1,
-          (e.currentTarget as HTMLInputElement).value.length - digits - 1
-        );
+      ).toString(hasSign, digitsCount);
+
+      if (digitsCount && inputElement.selectionStart) {
+        const cursorPosition =
+          (e.currentTarget as HTMLInputElement).value.length - digitsCount - 1;
+        inputElement.setSelectionRange(cursorPosition, cursorPosition);
       }
 
       inputElement.focus();
@@ -51,54 +62,13 @@ export class PriceValueObject extends NumberValueObject {
   }
 
   static fromString(strPrice: string): PriceValueObject {
-    return new PriceValueObject(PriceValueObject._stringToPrice(strPrice));
+    const price = parseFloat(strPrice.replace(/[$,]/g, ""));
+    return Number.isNaN(price)
+      ? PriceValueObject.zero()
+      : new PriceValueObject(price);
   }
 
-  private static _priceToString(
-    price: number,
-    digits: number,
-    sign: boolean = false
-  ) {
-    return this._formatCurrency(price, digits, sign);
-  }
-
-  private static _stringToPrice(strPrice: string) {
-    return this._unformatCurrency(strPrice);
-  }
-
-  private static _formatCurrency(
-    num: number,
-    fractionDigits: number,
-    sign: boolean = false
-  ) {
-    const addCommas = (nStr: string) => {
-      nStr += "";
-      let x = nStr.split(".");
-      let x1 = x[0];
-      let x2 = x.length > 1 ? "." + x[1] : "";
-      let rgx = /(\d+)(\d{3})/;
-      while (rgx.test(x1)) {
-        x1 = x1.replace(rgx, "$1,$2");
-      }
-      return x1 + x2;
-    };
-    let formatted = `${num.toFixed(fractionDigits)}`;
-    formatted = addCommas(formatted);
-    if (sign) {
-      if (num < 0) {
-        formatted = formatted.slice(1, formatted.length);
-        formatted = `-$${formatted.replaceAll("$", "").trim()}`;
-      } else {
-        formatted = `$${formatted.replaceAll("$", "").trim()}`;
-      }
-    }
-    return formatted;
-  }
-
-  private static _unformatCurrency(strCurrency: string) {
-    const price = parseFloat(
-      strCurrency.replaceAll("$", "").replaceAll(",", "")
-    );
-    return Number.isNaN(price) ? 0 : price;
+  toNumber(): number {
+    return this.valueOf();
   }
 }

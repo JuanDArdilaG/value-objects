@@ -40,12 +40,12 @@ export class ValueObject<T extends Object> implements IValueObject<T> {
     return this._value.toString();
   }
 
-  validate(val: T): Error | boolean {
-    const validation = this._options.validator?.validate(val);
+  validate(value: T): Error | boolean {
+    const validation = this._options.validator?.validate(value);
     if (!this._options.validator || validation === true) return true;
-    if (validation === false) return false;
+    if (!validation) return false;
     return validation instanceof Error
       ? validation
-      : new InvalidArgumentError(this.constructor.name, val);
+      : new InvalidArgumentError(this.constructor.name, value);
   }
 }
