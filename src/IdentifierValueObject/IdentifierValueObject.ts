@@ -12,7 +12,7 @@ export class IdentifierValueObject<T extends Object> implements Identifier<T> {
     return this.valueOf() === o.valueOf();
   }
 
-  validate(val: T): false | void | Error {
+  validate(val: T): Error | boolean {
     return this._validator.validate(val);
   }
 

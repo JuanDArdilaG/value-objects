@@ -6,13 +6,12 @@ export class UUIDValueObjectValidator extends StringValueObjectValidator {
     super({ minLength: 0, maxLength: 200 });
   }
 
-  validate(value: string): false | void | Error {
+  validate(value: string): Error | boolean {
     const strValidation = super.validate(value);
-    if (strValidation instanceof Error || strValidation === false) {
+    if (strValidation instanceof Error || !strValidation) {
       return strValidation;
     }
-    if (!validate(value)) {
-      return false;
-    }
+
+    return validate(value);
   }
 }

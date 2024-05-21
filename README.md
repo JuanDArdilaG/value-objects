@@ -14,7 +14,7 @@ Each VO have two scopes/definitions: Validator and Operator.
 
 ```typescript
 type Validator {
-    validate(val: T): Error | false | void;
+    validate(val: T): Error | boolean;
 }
 ```
 

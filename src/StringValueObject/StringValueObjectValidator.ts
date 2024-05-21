@@ -7,7 +7,7 @@ export class StringValueObjectValidator implements IValidator<string> {
     private _length: StringLengthOptions = { minLength: 0, maxLength: 100000 }
   ) {}
 
-  validate(value: string): Error | false | void {
+  validate(value: string): Error | boolean {
     if (typeof value !== "string") {
       return false;
     }
@@ -19,5 +19,7 @@ export class StringValueObjectValidator implements IValidator<string> {
         `<${this.constructor.name}>`,
         this._length
       );
+
+    return true;
   }
 }

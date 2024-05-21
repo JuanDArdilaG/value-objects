@@ -118,7 +118,7 @@ export class StringValueObjectValidator implements IValidator&lt;string&gt; {
     private _length: StringLengthOptions = <span class="branch-0 cbranch-no" title="branch not covered" >{ minLength: 0, maxLength: 100000 }</span>
   ) {}
 &nbsp;
-  validate(value: string): Error | false | void {
+  validate(value: string): Error | boolean {
     <span class="missing-if-branch" title="if path not taken" >I</span>if (typeof value !== "string") {
 <span class="cstat-no" title="statement not covered" >      return false;</span>
     }

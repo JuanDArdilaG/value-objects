@@ -8,7 +8,7 @@ export interface PIIOptions {
 }
 
 export interface ValueObjectOptions<T extends Object> {
-  validator: IValidator<T>;
+  validator?: IValidator<T>;
   pii?: PIIOptions;
 }
 
@@ -40,13 +40,12 @@ export class ValueObject<T extends Object> implements IValueObject<T> {
     return this._value.toString();
   }
 
-  validate(val: T): Error | void {
-    const validation = this._options.validator.validate(val);
-    if (validation instanceof Error) {
-      return validation;
-    }
-    if (validation === false) {
-      return new InvalidArgumentError(this.constructor.name, val);
-    }
+  validate(val: T): Error | boolean {
+    const validation = this._options.validator?.validate(val);
+    if (!this._options.validator || validation === true) return true;
+    if (validation === false) return false;
+    return validation instanceof Error
+      ? validation
+      : new InvalidArgumentError(this.constructor.name, val);
   }
 }
