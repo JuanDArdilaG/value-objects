@@ -1,57 +1,57 @@
-import { IOperable } from "../ValueObject/IOperable";
+import { IOperator } from "../ValueObject/IArithmeticOperator";
+import { NumberValueObject } from "./NumberValueObject";
 
-export class NumberValueObjectOperator implements IOperable<number> {
-  constructor(private _value: number) {}
+export class NumberValueObjectOperator implements IOperator<number> {
+  constructor(protected _value: NumberValueObject) {}
 
-  add(other: number): number {
-    return this._value + other;
+  get value(): NumberValueObject {
+    return this._value;
   }
 
-  substract(other: number): number {
-    return this._value - other;
+  plus(other: NumberValueObject): NumberValueObjectOperator {
+    this._value = new NumberValueObject(
+      this._value.valueOf() + other.valueOf()
+    );
+    return this;
   }
 
-  times(x: number): number {
-    return this._value * x;
+  substract(other: NumberValueObject): NumberValueObjectOperator {
+    this._value = new NumberValueObject(
+      this._value.valueOf() - other.valueOf()
+    );
+    return this;
   }
 
-  equalTo(other: number): boolean {
-    return this._value === other;
+  times(x: number): NumberValueObjectOperator {
+    this._value = new NumberValueObject(this._value.valueOf() * x.valueOf());
+    return this;
   }
 
-  differsFrom(other: number): boolean {
-    return this._value !== other;
+  equalTo(other: NumberValueObject): boolean {
+    return this._value.valueOf() === other.valueOf();
   }
 
-  isLessThan(other: number): boolean {
-    return this._value < other;
+  differsFrom(other: NumberValueObject): boolean {
+    return this._value.valueOf() !== other.valueOf();
   }
 
-  isBiggerThan(other: number): boolean {
-    return this._value > other;
+  isLessThan(other: NumberValueObject): boolean {
+    return this._value.valueOf() < other.valueOf();
   }
 
-  isBiggerOrEqualThan(other: number): boolean {
+  isBiggerThan(other: NumberValueObject): boolean {
+    return this._value.valueOf() > other.valueOf();
+  }
+
+  isBiggerOrEqualThan(other: NumberValueObject): boolean {
     return this.isBiggerThan(other) || this.equalTo(other);
   }
 
-  encrypt(_: number): Promise<string> {
+  encrypt(_: NumberValueObject): Promise<string> {
     throw new Error("Method not implemented.");
   }
 
   decrypt(_: string): Promise<number> {
     throw new Error("Method not implemented.");
-  }
-
-  isPositive(n: number): boolean {
-    return n > 0;
-  }
-
-  isNegative(n: number): boolean {
-    return n < 0;
-  }
-
-  isZero(n: number): boolean {
-    return n === 0;
   }
 }

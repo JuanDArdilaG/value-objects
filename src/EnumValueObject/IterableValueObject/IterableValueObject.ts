@@ -16,10 +16,10 @@ export abstract class IterableValueObject<
   next(): T {
     const index = this._values.indexOf(this._value);
     if (index === -1) {
-      throw new Error("iterable value inválido: " + this._value);
+      throw new Error("iterable value invalid: " + this._value);
     }
     if (index === this._values.length - 1) {
-      throw new Error("no hay siguiente valor");
+      throw new Error("there is no next value");
     }
     this._value = this._values[index + 1];
     return this._value;

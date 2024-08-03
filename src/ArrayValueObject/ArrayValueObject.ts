@@ -1,5 +1,4 @@
 import { ValueObject } from "../ValueObject/ValueObject";
-import { ArrayValueObjectOperator } from "./ArrayValueObjectOperator";
 import { ArrayValueObjectValidator } from "./ArrayValueObjectValidator";
 
 export class ArrayValueObject<
@@ -8,8 +7,7 @@ export class ArrayValueObject<
   constructor(value: T[]) {
     super(
       {
-        validatable: new ArrayValueObjectValidator<T>(),
-        operable: new ArrayValueObjectOperator<T>(value),
+        validator: new ArrayValueObjectValidator<T>(),
       },
       value
     );

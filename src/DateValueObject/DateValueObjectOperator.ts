@@ -1,38 +1,45 @@
-import { IOperable } from "../ValueObject/IOperable";
+import { IOperator } from "../ValueObject/IArithmeticOperator";
+import { DateValueObject } from "./DateValueObject";
 
-export class DateValueObjectOperator implements IOperable<Date> {
+export class DateValueObjectOperator implements IOperator<Date> {
   constructor(private _value: Date) {}
 
-  add(other: Date): Date {
-    return new Date(this._value.getTime() + other.getTime());
+  get value(): DateValueObject {
+    return new DateValueObject(this._value);
   }
 
-  substract(other: Date): Date {
-    return new Date(this._value.getTime() - other.getTime());
+  plus(other: DateValueObject): DateValueObjectOperator {
+    this._value = new Date(this._value.getTime() + other.valueOf().getTime());
+    return this;
   }
 
-  times(_times: number, _x: Date): Date {
+  substract(other: DateValueObject): DateValueObjectOperator {
+    this._value = new Date(this._value.getTime() - other.valueOf().getTime());
+    return this;
+  }
+
+  times(_times: number, _x: DateValueObject): DateValueObjectOperator {
     throw new Error("Method not implemented.");
   }
 
-  equalTo(other: Date): boolean {
-    return this._value.valueOf() === other.valueOf();
+  equalTo(other: DateValueObject): boolean {
+    return this._value.valueOf() === other.valueOf().valueOf();
   }
 
-  differsFrom(other: Date): boolean {
-    return this._value.valueOf() !== other.valueOf();
+  differsFrom(other: DateValueObject): boolean {
+    return this._value.valueOf() !== other.valueOf().valueOf();
   }
 
-  isBiggerOrEqualThan(other: Date): boolean {
-    return this._value.valueOf() >= other.valueOf();
+  isBiggerOrEqualThan(other: DateValueObject): boolean {
+    return this._value.valueOf() >= other.valueOf().valueOf();
   }
 
-  isBiggerThan(other: Date): boolean {
-    return this._value.valueOf() > other.valueOf();
+  isBiggerThan(other: DateValueObject): boolean {
+    return this._value.valueOf() > other.valueOf().valueOf();
   }
 
-  isLessThan(other: Date): boolean {
-    return this._value.valueOf() < other.valueOf();
+  isLessThan(other: DateValueObject): boolean {
+    return this._value.valueOf() < other.valueOf().valueOf();
   }
 
   encrypt(_: Date): Promise<string> {

@@ -1,37 +1,45 @@
-import { IOperable } from "../ValueObject/IOperable";
+import { IOperator } from "../ValueObject/IArithmeticOperator";
+import { StringValueObject } from "./StringValueObject";
 
-export class StringValueObjectOperator implements IOperable<string> {
+export class StringValueObjectOperator implements IOperator<string> {
   constructor(private _value: string) {}
 
-  add(other: string): string {
-    return this._value + other;
+  get value(): StringValueObject {
+    return new StringValueObject(this._value);
   }
 
-  equalTo(other: string): boolean {
-    return this._value === other;
+  plus(other: StringValueObject): StringValueObjectOperator {
+    this._value = this._value + other.valueOf();
+    return this;
   }
 
-  differsFrom(other: string): boolean {
-    return this._value !== other;
+  substract(other: StringValueObject): StringValueObjectOperator {
+    this._value = this._value.replace(other.valueOf(), "");
+    return this;
   }
 
-  isBiggerOrEqualThan(other: string): boolean {
-    return this._value > other || this.equalTo(other);
+  times(times: number, x: StringValueObject): StringValueObjectOperator {
+    this._value = x.valueOf().repeat(times);
+    return this;
   }
 
-  isBiggerThan(other: string): boolean {
-    return this._value > other;
+  equalTo(other: StringValueObject): boolean {
+    return this._value === other.valueOf();
   }
 
-  isLessThan(other: string): boolean {
-    return this._value < other;
+  differsFrom(other: StringValueObject): boolean {
+    return this._value !== other.valueOf();
   }
 
-  substract(other: string): string {
-    return this._value.replace(other, "");
+  isBiggerOrEqualThan(other: StringValueObject): boolean {
+    return this._value > other.valueOf() || this.equalTo(other);
   }
 
-  times(times: number, x: string): string {
-    return x.repeat(times);
+  isBiggerThan(other: StringValueObject): boolean {
+    return this._value > other.valueOf();
+  }
+
+  isLessThan(other: StringValueObject): boolean {
+    return this._value < other.valueOf();
   }
 }

@@ -1,13 +1,29 @@
 import { ValueObject } from "../ValueObject";
-import { IOperable } from "../ValueObject/IOperable";
+import { IOperator } from "../ValueObject/IArithmeticOperator";
+import { ArrayValueObject } from "./ArrayValueObject";
 
 export class ArrayValueObjectOperator<T extends ValueObject<Object>>
-  implements IOperable<T[]>
+  implements IOperator<T[]>
 {
   constructor(private _value: T[]) {}
 
-  add(other: T[]): T[] {
-    return this._value.concat(other);
+  get value(): ArrayValueObject<T> {
+    return new ArrayValueObject(this._value);
+  }
+
+  plus(other: ArrayValueObject<T>): ArrayValueObjectOperator<T> {
+    this._value = this._value.concat(other.valueOf());
+    return this;
+  }
+
+  substract(other: ArrayValueObject<T>): ArrayValueObjectOperator<T> {
+    this._value = this._value.filter((v) => !other.valueOf().includes(v));
+    return this;
+  }
+
+  times(times: number): ArrayValueObjectOperator<T> {
+    this._value = Array(times).fill(this._value).flat();
+    return this;
   }
 
   encrypt(_: T[]): Promise<string> {
@@ -18,31 +34,23 @@ export class ArrayValueObjectOperator<T extends ValueObject<Object>>
     throw new Error("Method not implemented.");
   }
 
-  differsFrom(other: T[]): boolean {
-    return this._value !== other;
+  differsFrom(other: ArrayValueObject<T>): boolean {
+    return this._value !== other.valueOf();
   }
 
-  equalTo(other: T[]): boolean {
-    return this._value === other;
+  equalTo(other: ArrayValueObject<T>): boolean {
+    return this._value === other.valueOf();
   }
 
-  isBiggerOrEqualThan(other: T[]): boolean {
-    return this._value >= other;
+  isBiggerOrEqualThan(other: ArrayValueObject<T>): boolean {
+    return this._value >= other.valueOf();
   }
 
-  isBiggerThan(other: T[]): boolean {
-    return this._value > other;
+  isBiggerThan(other: ArrayValueObject<T>): boolean {
+    return this._value > other.valueOf();
   }
 
-  isLessThan(other: T[]): boolean {
-    return this._value < other;
-  }
-
-  substract(other: T[]): T[] {
-    return this._value.filter((v) => !other.includes(v));
-  }
-
-  times(times: number, x: T[]): T[] {
-    return Array(times).fill(x).flat();
+  isLessThan(other: ArrayValueObject<T>): boolean {
+    return this._value < other.valueOf();
   }
 }

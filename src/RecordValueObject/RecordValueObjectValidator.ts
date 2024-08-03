@@ -1,10 +1,10 @@
-import { IValidatable } from "../ValueObject/IValidatable";
+import { IValidator } from "../ValueObject/IValidator";
 import { RecordValueObjectType } from "./RecordValueObject";
 
 export class RecordValueObjectValidator
-  implements IValidatable<RecordValueObjectType>
+  implements IValidator<RecordValueObjectType>
 {
-  validate(value: RecordValueObjectType): Error | false | void {
-    if (typeof value !== "object") return false;
+  validate(value: RecordValueObjectType): Error | boolean {
+    return typeof value === "object";
   }
 }

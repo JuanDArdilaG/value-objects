@@ -1,7 +1,10 @@
-import { StringValueObjectOperator } from "../StringValueObject";
+import {
+  StringValueObject,
+  StringValueObjectOperator,
+} from "../StringValueObject";
 
 export class UUIDValueObjectOperator extends StringValueObjectOperator {
-  add(_: string): string {
+  plus(_: StringValueObject): StringValueObjectOperator {
     throw new Error("method not implemented.");
   }
 }

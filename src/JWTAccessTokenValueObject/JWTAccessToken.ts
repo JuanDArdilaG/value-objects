@@ -17,7 +17,11 @@ export class JWTAccessToken extends StringValueObject {
     return new JWTAccessToken(jwtString, true);
   }
 
-  get options(): JWTAccessTokenOptions {
+  get jwtOptions(): JWTAccessTokenOptions {
     return this._jwtOptions;
   }
 }
+
+export type TJWTAccessToken = {
+  token: string;
+};
