@@ -1,5 +1,6 @@
 import { ValueObject } from "../ValueObject";
-import { PasswordCrypter } from "./PasswordCrypter";
+import { BcryptPasswordCrypter } from "./crypter/BcryptPasswordCrypter";
+import { IPasswordCrypter } from "./crypter/IPasswordCrypter";
 import { PasswordValueObjectValidator } from "./PasswordValueObjectValidator";
 
 export type TPasswordValueObject = {
@@ -7,8 +8,14 @@ export type TPasswordValueObject = {
   isEncrypted: boolean;
 };
 
+if (!process.env.BCRYPT_SALT)
+  throw new Error("BCRYPT_SALT env variable not setted");
+
 export class PasswordValueObject extends ValueObject<TPasswordValueObject> {
-  private static _crypter: PasswordCrypter;
+  private static _crypter: IPasswordCrypter = new BcryptPasswordCrypter(
+    process.env.BCRYPT_SALT ?? ""
+  );
+
   constructor(value: TPasswordValueObject) {
     super(
       {
@@ -18,7 +25,7 @@ export class PasswordValueObject extends ValueObject<TPasswordValueObject> {
     );
   }
 
-  static setCrypter(crypter: PasswordCrypter): void {
+  static setCrypter(crypter: IPasswordCrypter): void {
     PasswordValueObject._crypter = crypter;
   }
 
