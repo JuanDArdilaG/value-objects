@@ -1,13 +1,13 @@
-import { IValidatable } from "../ValueObject/IValidatable";
+import { IValidator } from "../ValueObject/IValidator";
+import { StringLengthOptions } from "./StringValueOptions";
 import { InvalidStringLengthError } from "./errors/InvalidStringLengthError";
-import { StringLengthOptions } from "./StringValueObject";
 
-export class StringValueObjectValidator implements IValidatable<string> {
+export class StringValueObjectValidator implements IValidator<string> {
   constructor(
     private _length: StringLengthOptions = { minLength: 0, maxLength: 100000 }
   ) {}
 
-  validate(value: string): Error | false | void {
+  validate(value: string): Error | boolean {
     if (typeof value !== "string") {
       return false;
     }
@@ -19,5 +19,7 @@ export class StringValueObjectValidator implements IValidatable<string> {
         `<${this.constructor.name}>`,
         this._length
       );
+
+    return true;
   }
 }

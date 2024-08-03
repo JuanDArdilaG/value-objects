@@ -1,16 +1,10 @@
-import { StringValueObjectOperator } from "../StringValueObject";
-import { UUIDValueObject } from "./UUIDValueObject";
+import {
+  StringValueObject,
+  StringValueObjectOperator,
+} from "../StringValueObject";
 
 export class UUIDValueObjectOperator extends StringValueObjectOperator {
-  add(_: UUIDValueObject, __: UUIDValueObject): UUIDValueObject {
+  plus(_: StringValueObject): StringValueObjectOperator {
     throw new Error("method not implemented.");
-  }
-
-  encrypt(val: string): Promise<string> {
-    return super.encrypt(val);
-  }
-
-  decrypt(val: string): Promise<string> {
-    return super.decrypt(val);
   }
 }

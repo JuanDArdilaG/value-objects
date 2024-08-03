@@ -1,66 +1,56 @@
 import { ValueObject } from "../ValueObject/ValueObject";
-import { BooleanValueObjectOperator } from "./BooleanValueObjectOperator";
 import { BooleanValueObjectValidator } from "./BooleanValueObjectValidator";
 
-export class BooleanValueObject<T extends any> extends ValueObject<boolean> {
-  private _eval: T = Object.create(null);
+export class BooleanValueObject extends ValueObject<boolean> {
+  private _fn: () => any = () => {};
   constructor(value: boolean) {
     super(
       {
-        operable: new BooleanValueObjectOperator<T>(),
-        validatable: new BooleanValueObjectValidator(),
+        validator: new BooleanValueObjectValidator(),
       },
       value
     );
   }
 
-  static from<T extends any>(
-    other: BooleanValueObject<any>
-  ): BooleanValueObject<T> {
-    return new BooleanValueObject<T>(other.value);
+  static true(): BooleanValueObject {
+    return new BooleanValueObject(true);
   }
 
-  static true<T extends any>(): BooleanValueObject<T> {
-    return new BooleanValueObject<T>(true);
+  static false(): BooleanValueObject {
+    return new BooleanValueObject(false);
   }
 
-  static false<T extends any>(): BooleanValueObject<T> {
-    return new BooleanValueObject<T>(false);
+  or(other: BooleanValueObject): BooleanValueObject {
+    return new BooleanValueObject(this.valueOf() || other.valueOf());
   }
 
-  or(other: BooleanValueObject<T>): BooleanValueObject<T> {
-    return new BooleanValueObject(this.value || other.value);
+  and(other: BooleanValueObject): BooleanValueObject {
+    return new BooleanValueObject(this.valueOf() && other.valueOf());
   }
 
-  and(other: BooleanValueObject<T>): BooleanValueObject<T> {
-    return new BooleanValueObject(this.value && other.value);
-  }
-
-  not(): BooleanValueObject<T> {
-    return new BooleanValueObject(!this.value);
+  not(): BooleanValueObject {
+    return new BooleanValueObject(!this.valueOf());
   }
 
   toString(): string {
-    return this.value ? "true" : "false";
+    return this.valueOf() ? "true" : "false";
   }
 
-  then(fn: () => T): BooleanValueObject<T> {
-    if (!this.value) {
-      return this;
+  then<T>(fn: () => T): BooleanValueObject {
+    if (this.valueOf()) {
+      this._fn = fn;
     }
-    this._eval = fn();
     return this;
   }
 
-  else(fn: () => T): BooleanValueObject<T> {
-    if (this.value) {
-      return this;
+  else<T>(fn: () => T): BooleanValueObject {
+    if (!this.valueOf()) {
+      this._fn = fn;
     }
-    this._eval = fn();
     return this;
   }
 
-  eval(): T {
-    return this._eval;
+  eval<T>(): T {
+    return this._fn();
   }
 }

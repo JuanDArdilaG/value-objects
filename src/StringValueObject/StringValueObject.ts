@@ -1,46 +1,16 @@
-import { ValueObject, ValueObjectOptions } from "../ValueObject/ValueObject";
-import { StringValueObjectOperator } from "./StringValueObjectOperator";
-
-import { StringValueObjectValidator } from "./StringValueObjectValidator";
+import { ValueObject, ValueObjectOptions } from "../ValueObject";
+import { StringValueDefaultOptions } from "./StringValueOptions";
 
 export class StringValueObject extends ValueObject<string> {
-  constructor(_value: string, options?: Partial<ValueObjectOptions<string>>) {
-    super(
-      {
-        operable:
-          options?.operable ||
-          new StringValueObjectOperator(
-            options?.pii?.key || "",
-            options?.pii?.iv || ""
-          ),
-        validatable:
-          options?.validatable ||
-          new StringValueObjectValidator(StringLengthOptionsDefault),
-        pii: options?.pii,
-      },
-      _value
-    );
+  constructor(_value: string, options?: ValueObjectOptions<string>) {
+    super(options ?? StringValueDefaultOptions, _value);
   }
 
   static empty(): StringValueObject {
     return new StringValueObject("");
   }
 
-  isEmpty(): boolean {
-    return this._value == "";
-  }
-
-  is(value: string): boolean {
-    return this.value === value;
+  static withDefaultOptions(value: string): StringValueObject {
+    return new StringValueObject(value);
   }
 }
-
-export const StringLengthOptionsDefault: StringLengthOptions = {
-  minLength: 0,
-  maxLength: 100000,
-};
-
-export type StringLengthOptions = {
-  minLength: number;
-  maxLength: number;
-};

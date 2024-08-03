@@ -1,30 +1,45 @@
-import { IOperable } from "../ValueObject/IOperable";
+import { IOperator } from "../ValueObject/IArithmeticOperator";
 import { StringValueObject } from "./StringValueObject";
-import { cipher, util } from "node-forge";
 
-export class StringValueObjectOperator implements IOperable<string> {
-  constructor(private _key: string, private _iv: string) {}
+export class StringValueObjectOperator implements IOperator<string> {
+  constructor(private _value: string) {}
 
-  add(a: StringValueObject, b: StringValueObject): StringValueObject {
-    return new StringValueObject(a.value + b.value);
+  get value(): StringValueObject {
+    return new StringValueObject(this._value);
   }
 
-  async encrypt(val: string): Promise<string> {
-    var cipherer = cipher.createCipher("AES-CBC", this._key);
-
-    cipherer.start({ iv: this._iv });
-    cipherer.update(util.createBuffer(util.encodeUtf8(val)));
-    cipherer.finish();
-
-    return cipherer.output.toString();
+  plus(other: StringValueObject): StringValueObjectOperator {
+    this._value = this._value + other.valueOf();
+    return this;
   }
 
-  async decrypt(val: string): Promise<string> {
-    var decipher = cipher.createDecipher("AES-CBC", this._key);
-    decipher.start({ iv: this._iv });
-    decipher.update(util.createBuffer(val));
-    decipher.finish();
+  substract(other: StringValueObject): StringValueObjectOperator {
+    this._value = this._value.replace(other.valueOf(), "");
+    return this;
+  }
 
-    return decipher.output.toString();
+  times(times: number, x: StringValueObject): StringValueObjectOperator {
+    this._value = x.valueOf().repeat(times);
+    return this;
+  }
+
+  equalTo(other: StringValueObject): boolean {
+    return this._value === other.valueOf();
+  }
+
+  differsFrom(other: StringValueObject): boolean {
+    return this._value !== other.valueOf();
+  }
+
+  isBiggerOrEqualThan(other: StringValueObject): boolean {
+    return this._value > other.valueOf() || this.equalTo(other);
+  }
+
+  isBiggerThan(other: StringValueObject): boolean {
+    return this._value > other.valueOf();
+  }
+
+  isLessThan(other: StringValueObject): boolean {
+    return this._value < other.valueOf();
   }
 }

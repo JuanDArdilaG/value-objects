@@ -1,9 +1,7 @@
-import { IValidatable } from "../ValueObject/IValidatable";
+import { IValidator } from "../ValueObject/IValidator";
 
-export class DateValueObjectValidator implements IValidatable<Date> {
-  validate(val: Date): false | void | Error {
-    if (!(val instanceof Date)) {
-      return false;
-    }
+export class DateValueObjectValidator implements IValidator<Date> {
+  validate(val: Date): Error | boolean {
+    return val instanceof Date;
   }
 }

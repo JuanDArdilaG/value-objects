@@ -2,5 +2,6 @@
 
 export * from './IterableValueObject';
 export * from './EnumValueObject';
-export * from './EnumValueObjectOperator';
 export * from './EnumValueObjectValidator';
+export * from './MultiEnumValueObject';
+export * from './MultiEnumValueObjectValidator';

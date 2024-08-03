@@ -2,5 +2,4 @@
 
 export * from './errors';
 export * from './EmailValueObject';
-export * from './EmailValueObjectOperator';
 export * from './EmailValueObjectValidator';

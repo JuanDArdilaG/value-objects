@@ -1,18 +1,10 @@
 import { v4 } from "uuid";
 import { IdentifierValueObject } from "../IdentifierValueObject/IdentifierValueObject";
 import { UUIDValueObjectValidator } from "./UUIDValueObjectValidator";
-import { UUIDValueObjectOperator } from "./UUIDValueObjectOperator";
 
-export class UUIDValueObject extends IdentifierValueObject {
+export class UUIDValueObject extends IdentifierValueObject<string> {
   constructor(_value: string) {
-    super(_value, {
-      operable: new UUIDValueObjectOperator("", ""),
-      validatable: new UUIDValueObjectValidator(),
-    });
-  }
-
-  get value(): string {
-    return this._value;
+    super(_value, new UUIDValueObjectValidator());
   }
 
   static random(): UUIDValueObject {
