@@ -6,8 +6,6 @@ export class EnumValueObjectValidator<T extends Object>
   constructor(private _values: T[]) {}
 
   validate(value: T): Error | boolean {
-    if (!this._values.some((item) => item === value)) {
-      return false;
-    }
+    return this._values.some((item) => item === value);
   }
 }

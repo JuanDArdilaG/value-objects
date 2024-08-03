@@ -1,14 +1,13 @@
 import { IValidator } from "../ValueObject/IValidator";
-import { TPasswordValueObject } from "./PasswordValueObject";
 
-export class PasswordValueObjectValidator
-  implements IValidator<TPasswordValueObject>
-{
-  constructor() {}
-
-  validate(val: TPasswordValueObject): Error | boolean {
-    if (!val.isEncrypted && (val.value.length < 5 || val.value.length > 50)) {
-      return new Error("Password length must be between 5 and 50 characters");
+export class PasswordValueObjectValidator implements IValidator<string> {
+  constructor(private _options: { min: number; max: number }) {}
+  validate(val: string): Error | boolean {
+    if (val.length < this._options.min || val.length > this._options.max) {
+      return new Error(
+        `Password length must be between ${this._options.min} and ${this._options.max} characters`
+      );
     }
+    return true;
   }
 }

@@ -14,10 +14,7 @@ export interface ValueObjectOptions<T extends Object> {
 
 export class ValueObject<T extends Object> implements IValueObject<T> {
   constructor(private _options: ValueObjectOptions<T>, protected _value: T) {
-    const validation = this.validate(_value);
-    if (validation instanceof Error) {
-      throw validation;
-    }
+    this.validate(_value);
   }
 
   get options(): ValueObjectOptions<T> {
@@ -40,12 +37,11 @@ export class ValueObject<T extends Object> implements IValueObject<T> {
     return this._value.toString();
   }
 
-  validate(value: T): Error | boolean {
+  validate(value: T) {
     const validation = this._options.validator?.validate(value);
-    if (!this._options.validator || validation === true) return true;
-    if (!validation) return false;
-    return validation instanceof Error
-      ? validation
-      : new InvalidArgumentError(this.constructor.name, value);
+    if (!this._options.validator || validation === true) return;
+    if (!validation) throw new Error("invalid value object");
+    if (validation instanceof Error) throw validation;
+    throw new InvalidArgumentError(this.constructor.name, value);
   }
 }
