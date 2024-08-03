@@ -1,6 +1,6 @@
 import { ValueObject } from "../ValueObject";
-import { BcryptPasswordCrypter } from "./crypter/BcryptPasswordCrypter";
-import { IPasswordCrypter } from "./crypter/IPasswordCrypter";
+import { BcryptPasswordHasher } from "./hasher/BcryptPasswordHasher";
+import { IPasswordHasher } from "./hasher/IPasswordHasher";
 import { PasswordValueObjectValidator } from "./PasswordValueObjectValidator";
 
 export type TPasswordValueObject = {
@@ -12,7 +12,7 @@ if (!process.env.BCRYPT_SALT)
   throw new Error("BCRYPT_SALT env variable not setted");
 
 export class PasswordValueObject extends ValueObject<TPasswordValueObject> {
-  private static _crypter: IPasswordCrypter = new BcryptPasswordCrypter(
+  private static _hasher: IPasswordHasher = new BcryptPasswordHasher(
     process.env.BCRYPT_SALT ?? ""
   );
 
@@ -25,23 +25,23 @@ export class PasswordValueObject extends ValueObject<TPasswordValueObject> {
     );
   }
 
-  static setCrypter(crypter: IPasswordCrypter): void {
-    PasswordValueObject._crypter = crypter;
+  static setCrypter(hasher: IPasswordHasher): void {
+    PasswordValueObject._hasher = hasher;
   }
 
-  static raw(pass: string): PasswordValueObject {
+  static fromRaw(pass: string): PasswordValueObject {
     return new PasswordValueObject({ value: pass, isEncrypted: false });
   }
 
-  static encrypted(pass: string): PasswordValueObject {
+  static fromEncrypted(pass: string): PasswordValueObject {
     return new PasswordValueObject({ value: pass, isEncrypted: true });
   }
 
   async encrypt(): Promise<void> {
-    if (this.valueOf().isEncrypted || !PasswordValueObject._crypter) {
+    if (this.valueOf().isEncrypted || !PasswordValueObject._hasher) {
       return;
     }
-    const encrypted = await PasswordValueObject._crypter.encrypt(
+    const encrypted = await PasswordValueObject._hasher.hash(
       this.valueOf().value
     );
     this._value.isEncrypted = true;
@@ -49,10 +49,10 @@ export class PasswordValueObject extends ValueObject<TPasswordValueObject> {
   }
 
   async check(plain: string): Promise<boolean> {
-    if (!this.valueOf().isEncrypted || !PasswordValueObject._crypter) {
+    if (!this.valueOf().isEncrypted || !PasswordValueObject._hasher) {
       return this.valueOf().value === plain;
     }
-    const ok = await PasswordValueObject._crypter.check(
+    const ok = await PasswordValueObject._hasher.check(
       this.valueOf().value,
       plain
     );

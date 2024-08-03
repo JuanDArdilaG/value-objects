@@ -1,10 +1,10 @@
-import { IPasswordCrypter } from "./IPasswordCrypter";
+import { IPasswordHasher } from "./IPasswordHasher";
 import { hash, compare } from "bcrypt";
 
-export class BcryptPasswordCrypter implements IPasswordCrypter {
+export class BcryptPasswordHasher implements IPasswordHasher {
   constructor(private _saltOrRounds: string | number) {}
 
-  encrypt(plain: string): Promise<string> {
+  hash(plain: string): Promise<string> {
     return hash(plain, this._saltOrRounds);
   }
 
