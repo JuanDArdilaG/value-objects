@@ -8,7 +8,6 @@ export * from './DomainEvent';
 export * from './EmailValueObject';
 export * from './EnumValueObject';
 export * from './ExceptionValueObject';
-export * from './IdentifierValueObject';
 export * from './JWTAccessTokenValueObject';
 export * from './NumberValueObject';
 export * from './PasswordValueObject';

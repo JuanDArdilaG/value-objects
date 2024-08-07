@@ -1,18 +1,18 @@
-import { IdentifierValueObject } from "../IdentifierValueObject";
 import { DomainEvent } from "../DomainEvent/DomainEvent";
+import { StringValueObject } from "../StringValueObject";
 
 export abstract class AggregateRoot {
   private domainEvents: Array<DomainEvent>;
 
-  constructor(protected _id: IdentifierValueObject<string>) {
+  constructor(protected _id: StringValueObject) {
     this.domainEvents = [];
   }
 
-  get id(): IdentifierValueObject<string> {
+  get id(): StringValueObject {
     return this._id;
   }
 
-  set id(id: IdentifierValueObject<string>) {
+  set id(id: StringValueObject) {
     this._id = id;
   }
 

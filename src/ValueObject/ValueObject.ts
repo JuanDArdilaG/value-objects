@@ -1,4 +1,5 @@
 import { InvalidArgumentError } from "./errors/InvalidArgumentError";
+import { InvalidValueObjectValueError } from "./errors/InvalidValueObjectValueError";
 import { IValidator } from "./IValidator";
 import { IValueObject } from "./IValueObject";
 
@@ -40,7 +41,8 @@ export class ValueObject<T extends Object> implements IValueObject<T> {
   validate(value: T) {
     const validation = this._options.validator?.validate(value);
     if (!this._options.validator || validation === true) return;
-    if (!validation) throw new Error("invalid value object");
+    if (!validation)
+      throw new InvalidValueObjectValueError(this.constructor.name, value);
     if (validation instanceof Error) throw validation;
     throw new InvalidArgumentError(this.constructor.name, value);
   }
