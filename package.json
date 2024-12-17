@@ -1,6 +1,6 @@
 {
   "name": "@juandardilag/value-objects",
-  "version": "1.3.1-alpha.3",
+  "version": "1.3.1-alpha.5",
   "description": "DDD Value Objects Node/Typescript implementations (classes, types, operations, etc.)",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -38,10 +38,8 @@
     "ts-jest": "^29.1.0",
     "typescript": "^5.0.4"
   },
-  "_moduleAliases": {
-    "@packname": "dist"
+  "exports": {
+    "./PriceValueObject": "./dist/PriceValueObject"
   },
-  "files": [
-    "dist/**/*"
-  ]
+  "type": "module"
 }
