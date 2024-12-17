@@ -43,6 +43,7 @@ export class PriceValueObject extends NumberValueObject {
 
   static parseInput(
     inputElement: HTMLInputElement,
+    cb?: (price: string) => void,
     hasSign = true,
     digitsCount = 0
   ) {
@@ -59,6 +60,8 @@ export class PriceValueObject extends NumberValueObject {
       }
 
       inputElement.focus();
+
+      if (cb) cb(inputElement.value);
     };
   }
 
