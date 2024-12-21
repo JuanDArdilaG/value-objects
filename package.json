@@ -1,8 +1,7 @@
 {
   "name": "@juandardilag/value-objects",
-  "version": "1.3.1-alpha.8",
+  "version": "1.3.1-alpha.10",
   "description": "DDD Value Objects Node/Typescript implementations (classes, types, operations, etc.)",
-  "types": "dist/index.d.ts",
   "scripts": {
     "test": "npm run test:unit",
     "test:unit": "NODE_ENV=test jest --config jest-unit.json",
