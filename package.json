@@ -43,15 +43,19 @@
     "./PriceValueObject": {
       "import": "./dist/PriceValueObject/index.js",
       "types": "./dist/PriceValueObject/index.d.ts"
+    },
+    "./PasswordValueObject": {
+      "import": "./dist/PasswordValueObject/index.js",
+      "types": "./dist/PasswordValueObject/index.d.ts"
     }
   },
   "typesVersions": {
     "*": {
-      "index": [
-        "./dist/index.d.ts"
-      ],
       "PriceValueObject": [
         "./dist/PriceValueObject/index.d.ts"
+      ],
+      "PasswordValueObject": [
+        "./dist/PasswordValueObject/index.d.ts"
       ]
     }
   }
