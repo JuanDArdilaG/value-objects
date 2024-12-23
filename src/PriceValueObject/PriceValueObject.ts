@@ -33,7 +33,7 @@ export class PriceValueObject extends NumberValueObject {
   }
 
   toString(sign: boolean = true, digits: number = 0): string {
-    let formatted = this._addCommas(`${this._value.toFixed(digits)}`);
+    let formatted = this._addCommas(`${Math.abs(this._value).toFixed(digits)}`);
     if (sign) {
       formatted = `$${formatted}`;
       if (this._value < 0) formatted = `-${formatted}`;

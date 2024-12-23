@@ -37,4 +37,12 @@ describe("PriceValueObject.toString(...)", () => {
 
     expect(priceValue).toBe("1,234.5");
   });
+
+  it("PriceValueObject should format a negative number", () => {
+    const inputPriceString = -1234.5;
+
+    const priceValue = new PriceValueObject(inputPriceString).toString();
+
+    expect(priceValue).toBe("-$1,235");
+  });
 });
