@@ -27,6 +27,17 @@ describe("PriceValueObject.toString(...)", () => {
     expect(priceValue).toBe("$1,234.50");
   });
 
+  it("PriceValueObject should format to (with sign, unlimited digits) string", () => {
+    const inputPriceString = 1234.0123456789;
+
+    const priceValue = new PriceValueObject(inputPriceString).toString(
+      true,
+      -1
+    );
+
+    expect(priceValue).toBe("$1,234.0123456789");
+  });
+
   it("PriceValueObject should format to (without sign, 1 digits) string", () => {
     const inputPriceString = 1234.5;
 
