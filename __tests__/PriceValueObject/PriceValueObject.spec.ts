@@ -56,4 +56,15 @@ describe("PriceValueObject.toString(...)", () => {
 
     expect(priceValue).toBe("-$1,235");
   });
+
+  it("PriceValueObject should with multiple decimals", () => {
+    const inputPriceString = 123.12345;
+
+    const priceValue = new PriceValueObject(inputPriceString).toString(
+      true,
+      -1
+    );
+
+    expect(priceValue).toBe("$123.12345");
+  });
 });
