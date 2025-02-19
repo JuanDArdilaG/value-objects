@@ -2,6 +2,7 @@ import {
   BooleanValueObject,
   BooleanValueObjectOperator,
 } from "../../src/BooleanValueObject";
+import { describe, it, expect } from "vitest";
 
 describe("BooleanValueObjects addition (+)", () => {
   it("true + true should be true", () => {

@@ -5,8 +5,6 @@ export type PhoneNumberValueObjectOptions = { required: boolean };
 
 export class PhoneNumberValueObject extends StringValueObject {
   constructor(value: string, _options?: PhoneNumberValueObjectOptions) {
-    super(value, {
-      validator: new PhoneNumberValueObjectValidator(_options),
-    });
+    super(value, new PhoneNumberValueObjectValidator(_options));
   }
 }

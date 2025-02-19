@@ -1,26 +1,21 @@
-import { IOperator } from "../ValueObject/IArithmeticOperator";
+import { NewIOperator } from "../ValueObject/IArithmeticOperator";
 import { StringValueObject } from "./StringValueObject";
 
-export class StringValueObjectOperator implements IOperator<string> {
+export class StringValueObjectOperator
+  implements NewIOperator<StringValueObject>
+{
   constructor(private _value: string) {}
 
-  get value(): StringValueObject {
-    return new StringValueObject(this._value);
+  plus(other: StringValueObject): StringValueObject {
+    return new StringValueObject(this._value + other.valueOf());
   }
 
-  plus(other: StringValueObject): StringValueObjectOperator {
-    this._value = this._value + other.valueOf();
-    return this;
+  substract(other: StringValueObject): StringValueObject {
+    return new StringValueObject(this._value.replace(other.valueOf(), ""));
   }
 
-  substract(other: StringValueObject): StringValueObjectOperator {
-    this._value = this._value.replace(other.valueOf(), "");
-    return this;
-  }
-
-  times(times: number, x: StringValueObject): StringValueObjectOperator {
-    this._value = x.valueOf().repeat(times);
-    return this;
+  times(_times: number, _x: StringValueObject): StringValueObject {
+    return new StringValueObject(this._value.repeat(_times));
   }
 
   equalTo(other: StringValueObject): boolean {

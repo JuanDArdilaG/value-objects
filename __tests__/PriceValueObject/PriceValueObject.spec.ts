@@ -1,4 +1,5 @@
 import { PriceValueObject } from "../../src/PriceValueObject";
+import { describe, it, expect } from "vitest";
 
 describe("PriceValueObject creation", () => {
   it("PriceValueObject.fromString should create a PriceVO from a string correctly", () => {

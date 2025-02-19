@@ -1,4 +1,5 @@
 import { StringValueObject } from "../../src/StringValueObject";
+import { describe, it, expect } from "vitest";
 
 describe("StringValueObject", () => {
   it("should be empty", () => {
@@ -7,11 +8,11 @@ describe("StringValueObject", () => {
     expect(stringVO.valueOf()).toBe("");
   });
 
-  it("should create a StringVO from other StringVO", () => {
+  it("should convert to string on literal string", () => {
     const stringVO = new StringValueObject("test");
 
-    const stringVO2 = StringValueObject.from(stringVO);
+    const str = `${stringVO}`;
 
-    expect(stringVO2.valueOf()).toBe("test");
+    expect(str).toBe("test");
   });
 });

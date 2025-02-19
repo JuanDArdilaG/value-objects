@@ -1,4 +1,5 @@
 import { PasswordValueObject } from "../../src/PasswordValueObject/PasswordValueObject";
+import { describe, it, expect } from "vitest";
 
 describe("PasswordValueObject creation", () => {
   it("PasswordValueObject.fromRaw should create a PasswordVO correctly", async () => {

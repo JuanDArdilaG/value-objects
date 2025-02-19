@@ -3,8 +3,6 @@ import { EmailValueObjectValidator } from "./EmailValueObjectValidator";
 
 export class EmailValueObject extends StringValueObject {
   constructor(email: string) {
-    super(email, {
-      validator: new EmailValueObjectValidator(),
-    });
+    super(email, new EmailValueObjectValidator());
   }
 }

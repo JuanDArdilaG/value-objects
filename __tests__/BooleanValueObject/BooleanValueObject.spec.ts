@@ -1,4 +1,5 @@
 import { BooleanValueObject } from "../../src/BooleanValueObject";
+import { describe, it, expect } from "vitest";
 
 describe("BooleanValueObject", () => {
   it("named constructor should return true vo", () => {

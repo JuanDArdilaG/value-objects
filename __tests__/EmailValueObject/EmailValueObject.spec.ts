@@ -1,5 +1,7 @@
 import { EmailValueObject } from "../../src/EmailValueObject/EmailValueObject";
 import { InvalidValueObjectValueError } from "../../src/ValueObject/errors/InvalidValueObjectValueError";
+import { describe, it, expect } from "vitest";
+
 describe("EmailValueObject creation", () => {
   it("Should throw an InvalidValueObjectValueError on invalid email", () => {
     const input = "abc";
