@@ -33,7 +33,10 @@ export class PriceValueObject extends NumberValueObject {
   }
 
   toString(sign: boolean = true, digits: number = 0): string {
-    let formatted = this._addCommas(`${this._value.toFixed(digits)}`);
+    let val = Math.abs(this._value);
+    let formatted = this._addCommas(
+      `${digits >= 0 ? val.toFixed(digits) : val}`
+    );
     if (sign) {
       formatted = `$${formatted}`;
       if (this._value < 0) formatted = `-${formatted}`;
@@ -43,22 +46,38 @@ export class PriceValueObject extends NumberValueObject {
 
   static parseInput(
     inputElement: HTMLInputElement,
+    cb?: (price: string) => void,
     hasSign = true,
     digitsCount = 0
   ) {
     inputElement.oninput = (e) => {
       e.preventDefault();
-      inputElement.value = PriceValueObject.fromString(
-        (e.currentTarget as HTMLInputElement).value
-      ).toString(hasSign, digitsCount);
+      let value = (e.currentTarget as HTMLInputElement).value;
 
-      if (digitsCount && inputElement.selectionStart) {
-        const cursorPosition =
-          (e.currentTarget as HTMLInputElement).value.length - digitsCount - 1;
+      let strValue = PriceValueObject.fromString(value).toString(
+        hasSign,
+        digitsCount
+      );
+
+      const lastChar = value[value.length - 1];
+      if (
+        value.includes(".") &&
+        digitsCount !== 0 &&
+        [".", "0"].includes(lastChar)
+      ) {
+        strValue += lastChar;
+      }
+
+      inputElement.value = strValue;
+
+      if (digitsCount > 0 && inputElement.selectionStart) {
+        const cursorPosition = value.length - digitsCount - 1;
         inputElement.setSelectionRange(cursorPosition, cursorPosition);
       }
 
       inputElement.focus();
+
+      if (cb) cb(inputElement.value);
     };
   }
 
