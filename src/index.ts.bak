@@ -1,14 +1,13 @@
 // created from 'create-ts-index'
 
-export * from './AggregateRoot';
+export * from './errors';
 export * from './ArrayValueObject';
 export * from './BooleanValueObject';
 export * from './DateValueObject';
-export * from './DomainEvent';
 export * from './EmailValueObject';
 export * from './EnumValueObject';
-export * from './ExceptionValueObject';
-export * from './JWTAccessTokenValueObject';
+export * from './IPasswordHasher';
+export * from './IValueObject';
 export * from './NumberValueObject';
 export * from './PasswordValueObject';
 export * from './PhoneNumberValueObject';
@@ -16,4 +15,3 @@ export * from './PriceValueObject';
 export * from './RecordValueObject';
 export * from './StringValueObject';
 export * from './UUIDValueObject';
-export * from './ValueObject';
