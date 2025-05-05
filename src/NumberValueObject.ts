@@ -55,8 +55,28 @@ export class NumberValueObject extends Number implements IValueObject<number> {
     return this.value === 0;
   }
 
+  compareTo(o: IValueObject<number>): number {
+    return this.value - o.value;
+  }
+
   equalTo(o: IValueObject<number>): boolean {
     return o.value === this.value;
+  }
+
+  greaterThan(o: IValueObject<number>): boolean {
+    return this.value > o.value;
+  }
+
+  lessThan(o: IValueObject<number>): boolean {
+    return this.value < o.value;
+  }
+
+  greaterOrEqualThan(o: IValueObject<number>): boolean {
+    return this.value >= o.value;
+  }
+
+  lessOrEqualThan(o: IValueObject<number>): boolean {
+    return this.value <= o.value;
   }
 
   fixed(n: number): NumberValueObject {

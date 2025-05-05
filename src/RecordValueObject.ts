@@ -23,6 +23,12 @@ export class RecordValueObject
     return new RecordValueObject({});
   }
 
+  compareTo(
+    _: IValueObject<Record<string, IValueObject<any> | undefined>>
+  ): number {
+    throw Error("pending implementation");
+  }
+
   equalTo(
     _: IValueObject<Record<string, IValueObject<any> | undefined>>
   ): boolean {

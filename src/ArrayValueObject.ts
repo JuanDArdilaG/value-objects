@@ -18,6 +18,10 @@ export class ArrayValueObject<T extends IValueObject<any>>
     return new ArrayValueObject([]);
   }
 
+  compareTo(_: IValueObject<T[]>): number {
+    throw Error("pending implementation");
+  }
+
   equalTo(_: IValueObject<T[]>): boolean {
     throw Error("pending implementation");
   }

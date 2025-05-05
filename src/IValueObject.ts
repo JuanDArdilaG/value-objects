@@ -3,6 +3,7 @@ export interface IValueObject<T extends Object> extends Object {
 
   validate(): Error | void;
 
+  compareTo(o: IValueObject<T>): number;
   equalTo(o: IValueObject<T>): boolean;
 
   toString(): string;
