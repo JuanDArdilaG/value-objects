@@ -15,15 +15,31 @@ export class DateValueObject extends Date implements IValueObject<Date> {
     return new DateValueObject(new Date());
   }
 
-  modifyHours(
+  updateTime(
     hours: number,
     min?: number,
     sec?: number,
     ms?: number
   ): DateValueObject {
     return new DateValueObject(
-      new Date(this.value.setHours(hours, min, sec, ms))
+      new Date(
+        this.value.getFullYear(),
+        this.value.getMonth(),
+        this.value.getDate(),
+        hours,
+        min,
+        sec,
+        ms
+      )
     );
+  }
+
+  updateDay(day: number): DateValueObject {
+    return new DateValueObject(new Date(this.value.setDate(day)));
+  }
+
+  updateMonth(month: number): DateValueObject {
+    return new DateValueObject(new Date(this.value.setMonth(month)));
   }
 
   compareTo(o: IValueObject<Date>): number {

@@ -34,6 +34,10 @@ export class BooleanValueObject
     return new BooleanValueObject(!this.valueOf());
   }
 
+  compareTo(o: IValueObject<boolean>): number {
+    return this.value === o.value ? 0 : this.value ? 1 : -1;
+  }
+
   equalTo(o: IValueObject<boolean>): boolean {
     return o.value === this.value;
   }
