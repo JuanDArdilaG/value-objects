@@ -9,7 +9,6 @@ export type PriceValueObjectConfig = {
 
 export const PriceValueObjectDefaultConfig: PriceValueObjectConfig = {
   withSign: true,
-  decimals: 0,
 };
 
 export class PriceValueObject extends NumberValueObject {

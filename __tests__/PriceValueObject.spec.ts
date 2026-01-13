@@ -17,7 +17,6 @@ describe("PriceValueObject.toString(...)", () => {
 
     const priceValue = new PriceValueObject(inputPriceString, {
       withSign: true,
-      decimals: 0,
     }).toString();
 
     expect(priceValue).toBe("$1,235");
