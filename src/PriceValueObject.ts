@@ -2,8 +2,9 @@ import { IValueObject } from "./IValueObject";
 import { NumberValueObject } from "./NumberValueObject";
 
 export type PriceValueObjectConfig = {
-  withSign: boolean;
-  decimals: number;
+  withSign?: boolean;
+  withZeros?: boolean;
+  decimals?: number;
 };
 
 export const PriceValueObjectDefaultConfig: PriceValueObjectConfig = {
@@ -27,7 +28,7 @@ export class PriceValueObject extends NumberValueObject {
     return new PriceValueObject(this.value + o.value, this._config);
   }
 
-  sustract(o: IValueObject<number>): PriceValueObject {
+  subtract(o: IValueObject<number>): PriceValueObject {
     return new PriceValueObject(this.value - o.value, this._config);
   }
 
@@ -57,7 +58,11 @@ export class PriceValueObject extends NumberValueObject {
   toString(): string {
     let val = Math.abs(this.value);
     let formatted = this._addCommas(
-      `${this._config.decimals >= 0 ? val.toFixed(this._config.decimals) : val}`
+      `${
+        this._config.decimals && this._config.decimals >= 0
+          ? val.toFixed(this._config.decimals)
+          : val
+      }`
     );
     if (this._config.withSign) {
       formatted = `$${formatted}`;
@@ -70,7 +75,8 @@ export class PriceValueObject extends NumberValueObject {
     let inputParts = input.split(".");
     let integerPart = inputParts[0];
     let decimalPart =
-      inputParts.length > 1 && Number.parseInt(inputParts[1]) > 0
+      inputParts.length > 1 &&
+      (this._config.withZeros || Number.parseInt(inputParts[1]) > 0)
         ? "." + inputParts[1]
         : "";
     let rgx = /(\d+)(\d{3})/;
@@ -102,9 +108,11 @@ export class PriceValueObject extends NumberValueObject {
 
       inputElement.value = strValue;
 
-      if (config.decimals > 0 && inputElement.selectionStart) {
-        const cursorPosition = value.length - config.decimals - 1;
-        inputElement.setSelectionRange(cursorPosition, cursorPosition);
+      if (config.decimals) {
+        if (config.decimals > 0 && inputElement.selectionStart) {
+          const cursorPosition = value.length - config.decimals - 1;
+          inputElement.setSelectionRange(cursorPosition, cursorPosition);
+        }
       }
 
       inputElement.focus();
