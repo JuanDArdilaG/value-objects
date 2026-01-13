@@ -69,7 +69,10 @@ export class PriceValueObject extends NumberValueObject {
   _addCommas(input: string) {
     let inputParts = input.split(".");
     let integerPart = inputParts[0];
-    let decimalPart = inputParts.length > 1 ? "." + inputParts[1] : "";
+    let decimalPart =
+      inputParts.length > 1 && Number.parseInt(inputParts[1]) > 0
+        ? "." + inputParts[1]
+        : "";
     let rgx = /(\d+)(\d{3})/;
     while (rgx.test(integerPart)) {
       integerPart = integerPart.replace(rgx, "$1,$2");
