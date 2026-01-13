@@ -59,9 +59,9 @@ export class PriceValueObject extends NumberValueObject {
     let val = Math.abs(this.value);
     let formatted = this._addCommas(
       `${
-        this._config.decimals && this._config.decimals >= 0
-          ? val.toFixed(this._config.decimals)
-          : val
+        this._config.decimals && this._config.decimals < 0
+          ? val
+          : val.toFixed(this._config.decimals ?? 0)
       }`
     );
     if (this._config.withSign) {
