@@ -24,31 +24,34 @@ export class PriceValueObject extends NumberValueObject {
   }
 
   plus(o: IValueObject<number>): PriceValueObject {
-    return new PriceValueObject(this.value + o.value);
+    return new PriceValueObject(this.value + o.value, this._config);
   }
 
   sustract(o: IValueObject<number>): PriceValueObject {
-    return new PriceValueObject(this.value - o.value);
+    return new PriceValueObject(this.value - o.value, this._config);
   }
 
   times(o: IValueObject<number>): PriceValueObject {
-    return new PriceValueObject(this.value * o.value);
+    return new PriceValueObject(this.value * o.value, this._config);
   }
 
   divide(o: IValueObject<number>): PriceValueObject {
-    return new PriceValueObject(this.value / o.value);
+    return new PriceValueObject(this.value / o.value, this._config);
   }
 
   abs(): PriceValueObject {
-    return new PriceValueObject(Math.abs(this.value));
+    return new PriceValueObject(Math.abs(this.value), this._config);
   }
 
   negate(): PriceValueObject {
-    return new PriceValueObject(-this.value);
+    return new PriceValueObject(-this.value, this._config);
   }
 
   fixed(n: number): PriceValueObject {
-    return new PriceValueObject(parseFloat(this.value.toFixed(n)));
+    return new PriceValueObject(
+      parseFloat(this.value.toFixed(n)),
+      this._config
+    );
   }
 
   toString(): string {
