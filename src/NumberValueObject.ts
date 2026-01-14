@@ -23,7 +23,7 @@ export class NumberValueObject extends Number implements IValueObject<number> {
     return new NumberValueObject(this.value + o.value);
   }
 
-  sustract(o: IValueObject<number>): NumberValueObject {
+  subtract(o: IValueObject<number>): NumberValueObject {
     return new NumberValueObject(this.value - o.value);
   }
 

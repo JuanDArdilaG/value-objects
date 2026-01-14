@@ -1,13 +1,12 @@
 {
   "name": "@juandardilag/value-objects",
-  "version": "2.0.0",
+  "version": "2.2.1",
   "description": "DDD Value Objects Node/Typescript implementations (classes, types, operations, etc.)",
   "scripts": {
     "test": "vitest run",
     "build": "tsc",
     "create-index": "cti create -n ./src",
     "prepublish": "npm run create-index && npm run test && npx rimraf dist/ && npm run build",
-    "pub": "npm i && git add -A && git commit --amend --no-edit && npm publish --access public && git push",
     "pub-alpha": "npm i && git add -A && git commit --amend --no-edit && npm publish --access public --tag alpha && git push"
   },
   "main": "dist/index.js",

@@ -15,7 +15,9 @@ describe("PriceValueObject.toString(...)", () => {
   it("PriceValueObject should format to default (with sign, 0 digits) string", () => {
     const inputPriceString = 1234.5;
 
-    const priceValue = new PriceValueObject(inputPriceString).toString();
+    const priceValue = new PriceValueObject(inputPriceString, {
+      withSign: true,
+    }).toString();
 
     expect(priceValue).toBe("$1,235");
   });
