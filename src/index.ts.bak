@@ -8,6 +8,7 @@ export * from './EmailValueObject';
 export * from './EnumValueObject';
 export * from './IPasswordHasher';
 export * from './IValueObject';
+export * from './NanoIDValueObject';
 export * from './NumberValueObject';
 export * from './PasswordValueObject';
 export * from './PhoneNumberValueObject';
