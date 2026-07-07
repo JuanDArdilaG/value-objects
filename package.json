@@ -12,9 +12,20 @@
   },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "ddd",
+    "domain-driven-design",
+    "value-objects",
+    "value-object",
+    "typescript",
+    "money",
+    "price"
+  ],
+  "author": "Juan Diego Ardila",
   "license": "ISC",
+  "engines": {
+    "node": ">=20"
+  },
   "repository": {
     "url": "git+https://github.com/JuanDArdilaG/value-objects.git",
     "type": "git"
