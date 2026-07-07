@@ -1,5 +1,6 @@
 import { IValueObject } from "./IValueObject";
 import { NumberValueObject } from "./NumberValueObject";
+import { InvalidArgumentError } from "./errors";
 
 export type PriceValueObjectConfig = {
   withSign?: boolean;
@@ -36,6 +37,8 @@ export class PriceValueObject extends NumberValueObject {
   }
 
   divide(o: IValueObject<number>): PriceValueObject {
+    if (o.value === 0)
+      throw new InvalidArgumentError("PriceValueObject.divide", o.value);
     return new PriceValueObject(this.value / o.value, this._config);
   }
 

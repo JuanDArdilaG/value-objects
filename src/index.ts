@@ -16,3 +16,4 @@ export * from './PriceValueObject';
 export * from './RecordValueObject';
 export * from './StringValueObject';
 export * from './UUIDValueObject';
+export * from './unwrap';
