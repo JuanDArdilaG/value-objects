@@ -4,10 +4,12 @@ import { IValueObject } from "./IValueObject";
 export class NumberValueObject extends Number implements IValueObject<number> {
   constructor(readonly value: number) {
     super(value);
+    if (!Number.isFinite(value))
+      throw new InvalidArgumentError("NumberValueObject", value);
   }
 
   validate(): Error | void {
-    if (typeof this.value !== "number")
+    if (typeof this.value !== "number" || !Number.isFinite(this.value))
       return new InvalidArgumentError("NumberValueObject", this.value);
   }
 
@@ -32,6 +34,8 @@ export class NumberValueObject extends Number implements IValueObject<number> {
   }
 
   divide(o: IValueObject<number>): NumberValueObject {
+    if (o.value === 0)
+      throw new InvalidArgumentError("NumberValueObject.divide", o.value);
     return new NumberValueObject(this.value / o.value);
   }
 
