@@ -2,6 +2,15 @@ import { IValueObject } from "./IValueObject";
 import { NumberValueObject } from "./NumberValueObject";
 import { InvalidArgumentError } from "./errors";
 
+export const PRICE_DECIMAL_BASE = 10;
+
+export function roundToDecimals(value: number, decimals: number): number {
+  const factor = PRICE_DECIMAL_BASE ** decimals;
+  const rounded =
+    (Math.sign(value) * Math.round(Math.abs(value) * factor)) / factor;
+  return rounded === 0 ? 0 : rounded;
+}
+
 export type PriceValueObjectConfig = {
   withSign?: boolean;
   withZeros?: boolean;
@@ -13,11 +22,20 @@ export const PriceValueObjectDefaultConfig: PriceValueObjectConfig = {
 };
 
 export class PriceValueObject extends NumberValueObject {
+  readonly price: number;
+  private readonly _config: PriceValueObjectConfig;
+
   constructor(
-    readonly price: number,
-    private readonly _config: PriceValueObjectConfig = PriceValueObjectDefaultConfig
+    price: number,
+    config: PriceValueObjectConfig = PriceValueObjectDefaultConfig
   ) {
-    super(price);
+    const rounded =
+      config.decimals != null && config.decimals >= 0
+        ? roundToDecimals(price, config.decimals)
+        : price;
+    super(rounded);
+    this.price = rounded;
+    this._config = config;
   }
 
   static zero(): PriceValueObject {
@@ -51,10 +69,7 @@ export class PriceValueObject extends NumberValueObject {
   }
 
   fixed(n: number): PriceValueObject {
-    return new PriceValueObject(
-      parseFloat(this.value.toFixed(n)),
-      this._config
-    );
+    return new PriceValueObject(roundToDecimals(this.value, n), this._config);
   }
 
   toString(): string {
