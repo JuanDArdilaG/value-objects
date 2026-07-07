@@ -37,11 +37,17 @@ publish bump_type="patch":
     new_version="$major.$minor.$patch"
     echo "New version: $new_version"
     
+    # Gate on a clean install + tests + build before touching the registry
+    npm ci
+    npm test
+    npm run build
+
     # Update package.json
     node -e "const fs=require('fs'); const pkg=JSON.parse(fs.readFileSync('package.json','utf8')); pkg.version='$new_version'; fs.writeFileSync('package.json', JSON.stringify(pkg, null, 2) + '\n');"
-    
-    # Commit, publish, and push
+
+    # Commit, tag, publish, and push (tag correlates the git ref to the published version)
     git add package.json
     git commit -m "Bump version to $new_version"
+    git tag "v$new_version"
     npm publish --access public
-    git push
+    git push --follow-tags
